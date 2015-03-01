@@ -4,13 +4,14 @@
 # --- !Ups
 
 create table account (
-  id                        integer primary key AUTOINCREMENT,
+  id                        bigint not null,
   username                  varchar(255),
   password                  varchar(255),
-  type                      integer)
+  type                      integer,
+  constraint pk_account primary key (id))
 ;
 
-
+create sequence account_seq;
 
 
 # --- !Downs
@@ -20,4 +21,3 @@ PRAGMA foreign_keys = OFF;
 drop table account;
 
 PRAGMA foreign_keys = ON;
-
