@@ -21,3 +21,4 @@ PRAGMA foreign_keys = OFF;
 drop table account;
 
 PRAGMA foreign_keys = ON;
+
