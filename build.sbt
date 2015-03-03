@@ -14,3 +14,4 @@ libraryDependencies ++= Seq(
   "org.xerial" % "sqlite-jdbc" % "3.7.2",
   "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
 )
+
