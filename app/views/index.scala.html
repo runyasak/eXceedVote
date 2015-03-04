@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html style="size: 100% 100%; background-color: #222227;">
 <head>
 
 <title>@title</title>
@@ -16,15 +16,11 @@
 <link rel="stylesheet" href="@routes.Assets.at("uikit/css/components/slidenav.css")">
 @css
 </head>
-<body style=" background: url(@routes.Assets.at("images/cover-header.jpg"));
-	background-size: 100% 50%;
-	background-position: top;
-	background-repeat: no-repeat;
-	background-color: black;">
+<body>
 <!-- head -->
-<nav class="uk-navbar" style="background-color: black;">
+<nav class="uk-navbar" style="background-color: #151515; padding: 0.5%">
     <ul class="uk-navbar-nav">
-    	<li><a href="#my-id" class="uk-navbar-toggle" data-uk-offcanvas></a></li>
+    	<li><a href="#my-id" class="uk-navbar-toggle" style="color: #00CFFF" data-uk-offcanvas></a></li>
         <li><a class="uk-text-large" style="color: #00CFFF" href="/"><b>eXceed</b> vote</a></li>
     </ul>
     <div class="uk-navbar-flip">
@@ -33,9 +29,11 @@
         </ul>
     </div>
 </nav>
-<div id="my-id" class="uk-offcanvas  uk-text-center " style="padding-top: 100%;">
+<div id="my-id" class="uk-offcanvas  uk-text-center " style="">
 		<div class="uk-offcanvas-bar ">
-			...
+			<ul>
+                <li><a>Profile</a></li>
+            </ul>
 		</div>
 </div>
 <!-- end head -->
@@ -44,13 +42,13 @@
 
 <br>
 <br>
-<nav class="uk-navbar" style="background-color: black;">
+<nav class="uk-navbar" style="background-color: #151515;">
     <ul class="uk-navbar-nav">
     	<li></li>
     </ul>
     <div class="uk-navbar-flip">
         <ul class="uk-navbar-nav">
-            <li class="uk-text-medium" style="color: #00CFFF" href="#"><b><--Developed by :</b> Ping Kai Studio--></li>
+            <li class="uk-text-medium" style="color: #FFFFFF" href="#"> <-- <b>Developed by :</b> Ping Kai Studio --> </li>&nbsp&nbsp
         </ul>
     </div>
 </nav>
