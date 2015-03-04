@@ -1,0 +1,25 @@
+@(form: Form[Application.Login])
+@css = {
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+}
+@index("Welcome to Play")(css) {
+@helper.form(routes.Application.authenticate){
+			<h1>Sign in</h1>
+			@if(form.hasGlobalErrors){
+				<p class="error">
+					@form.globalError.message
+				
+				</p>
+			}
+				
+				<input type="username" name="username" placeholder="username" >
+			
+				
+				<input type="password" name="password" placeholder="password" >
+			
+				
+				<button type="submit">Login</button>
+		}
+}
+
+	<!---->

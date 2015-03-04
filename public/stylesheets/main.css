@@ -1,0 +1,27 @@
+.uk-navbar{
+     background:rgb(24, 23, 23);
+}
+
+.blueText{
+    color: #00CFFF;
+}
+
+#whiteText{
+    color: white;
+}
+
+#login-button{
+    background-color: rgb(24, 23, 23);
+    color: rgb(17, 242, 208);
+    margin: 10px;
+}
+
+#register-button{
+    background-color: rgb(24, 23, 23);
+    color: rgb(242, 17, 43);
+    margin: 10px;
+}
+
+#header{
+    margin-bottom: 10%;
+}
