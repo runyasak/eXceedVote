@@ -39,7 +39,9 @@ public class Application extends Controller {
     		return redirect(routes.Application.main());	
     			
     	}
-    
+    public static Result result(){
+        return ok(result.render("5"));
+    }
     	
     }
     public static Result vote(){

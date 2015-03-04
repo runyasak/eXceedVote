@@ -1,0 +1,81 @@
+@(message: String)
+@css = {
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/result.css")">
+}
+@index(title = "eXceed Vote")(css) {
+<!-- <navbar class =""href="https://www.google.com">test</nav> -->
+<div class="uk-text-center uk-text-large" id = "title">
+      <div style="color:WHITE;">
+            Result
+      </div>
+</div>
+<div class="uk-grid ">
+<div class="uk-align-center" data-uk-grid-margin="" id = "tabs">
+
+            <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+                  <li class="uk-active"><a href="#">
+                        Creativity Score
+                  </a></li>
+
+                  <li class=""><a href="#">
+                        Design Score
+                  </a></li>
+
+                  <li class=""><a href="#">
+                        Usability Score
+                  </a></li>
+
+                  <li class=""><a href="#">
+                        Best Project Vote
+                  </a></li>
+
+                  <li class=""><a href="#">
+                        Best Design Vote
+                  </a></li>
+
+                  <div class="uk-dropdown uk-dropdown-small">
+                        <ul class="uk-nav uk-nav-dropdown">
+                        </ul>
+                  </div>
+            </ul>
+
+            <ul id="tab-content" class="uk-switcher uk-margin">
+            <li class="">
+                  <div>
+                        <table class="uk-table">
+                              <thead> 
+                                    <tr>
+                                          <th>Team Names</th>
+                                          <th>Scores</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr>
+                                          <td>Job Kark</td>
+                                          <td>0</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Job Kark</td>
+                                          <td>0</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Job Kark</td>
+                                          <td>0</td>
+                                    </tr>
+                                    <tr>
+                                          <td>Job Kark</td>
+                                          <td>0</td>
+                                    </tr>
+                                    <tr>
+                                          <td>World</td>
+                                          <td>0</td>
+                                    </tr>
+                              </tbody>
+                        </table>
+
+      </div>
+</div>
+</div>
+
+
+}
