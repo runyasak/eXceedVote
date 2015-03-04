@@ -1,7 +1,10 @@
 @(form: Form[Application.Login])
-@main("Welcome to Play") {
+@css = {
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+}
+@index("Welcome to Play")(css) {
 
-@helper.form(routes.Application.authenticate){
+	@helper.form(routes.Application.authenticate){
 			<h1>Sign in</h1>
 			@if(form.hasGlobalErrors){
 				<p class="error">
@@ -17,10 +20,5 @@
 			
 				
 				<button type="submit">Login</button>
-				
-		
 		}
-
 }
-
-	<!---->

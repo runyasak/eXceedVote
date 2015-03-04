@@ -1,0 +1,20 @@
+#blueText{
+	color: #00CFFF;
+}
+
+#whiteText{
+	color: white;
+}
+
+
+#navtop{
+	background-color: black;
+}
+
+#slide{
+	max-width: 600px;
+	max-height: 400px;
+	width: 60%;
+	height: 30%;
+	margin: auto;
+}

@@ -8,16 +8,13 @@ import views.html.*;
 import models.*;
 
 public class Register extends Controller {
-	public static Result index(){
-		
-		return redirect(routes.Application.index());
-		
-    	
+	public static Result main(){
+		return redirect(routes.Application.main());
 	}
 	public  static Result addAccount(){
 		//Account a = new Account ("aaa@aaa","bbb",1);
     	//a.save();
-		return index();
+		return main();
 	}
 
  
