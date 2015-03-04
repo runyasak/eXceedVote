@@ -42,6 +42,9 @@ public class Application extends Controller {
     
     	
     }
+    public static Result vote(){
+        return ok(vote.render());
+    }
     
     public static class Login{
     	public String username;

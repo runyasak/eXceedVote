@@ -12,3 +12,4 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 POST 	/login						controllers.Application.authenticate() 
 GET 	/team						controllers.Application.team()
+GET	/vote						controllers.Application.vote()
