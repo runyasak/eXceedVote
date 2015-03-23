@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/exceedvote -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.driver=org.mariadb.jdbc.Driver -Ddb.default.url=jdbc:mysql://128.199.133.130:49153/db\?user=root\&password=mrJcFmou8JvMdDd9
+web: target/universal/stage/bin/exceedvote -Dhttp.port=${PORT} -DapplyEvolutions.default=true -Ddb.default.driver=org.mariadb.jdbc.Driver -Ddb.default.url=jdbc:mysql://172.17.42.1:49154/db\?user=root\&password=266C0oFG3pKzHsHS
