@@ -1,11 +1,9 @@
-<<<<<<< HEAD
 eXceed Vote Web Application by Play Framework
-=================================
 
 create by TeamSaint4
-=======
+
 This is your new Play application
 =================================
 
 This file will be packaged with your application, when using `activator dist`.
->>>>>>> origin/master
+
