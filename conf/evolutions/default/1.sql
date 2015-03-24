@@ -4,10 +4,11 @@
 # --- !Ups
 
 create table account (
-  id                        integer primary key AUTOINCREMENT,
+  id                        bigint auto_increment not null,
   username                  varchar(255),
   password                  varchar(255),
-  type                      integer)
+  type                      integer,
+  constraint pk_account primary key (id))
 ;
 
 
@@ -15,9 +16,9 @@ create table account (
 
 # --- !Downs
 
-PRAGMA foreign_keys = OFF;
+SET FOREIGN_KEY_CHECKS=0;
 
 drop table account;
 
-PRAGMA foreign_keys = ON;
+SET FOREIGN_KEY_CHECKS=1;
 
