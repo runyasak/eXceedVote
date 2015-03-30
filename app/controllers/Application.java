@@ -3,7 +3,8 @@ package controllers;
 
 
 
-import play.*;  
+import play.*;
+import play.api.mvc.Session;
 import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*; 
@@ -13,6 +14,7 @@ import models.*;
 public class Application extends Controller {
 
     public static Result main() {
+    	
         return ok(main.render("5") );
     }
     public static Result login(){
@@ -32,6 +34,8 @@ public class Application extends Controller {
     		
     		session().clear();
     		session("username",loginForm.get().username);
+
+            System.out.println(session().get("username"));
     		return redirect(routes.Application.main());	
     			
     	}
@@ -44,6 +48,19 @@ public class Application extends Controller {
     }
     public static Result vote(){
         return ok(vote.render());
+    }
+    public static Result addTeam(){
+
+        return ok(newteam.render());
+    }
+    public static Result addAccount(){
+
+        return ok(newaccount.render());
+    }
+
+    public static Result addTopic(){
+
+        return ok(newtopic.render());
     }
     
     public static class Login{
