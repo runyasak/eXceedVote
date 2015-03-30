@@ -13,10 +13,6 @@ import models.*;
 public class Application extends Controller {
 
     public static Result main() {
-    	
-    	
-    		
-    	
         return ok(main.render("5") );
     }
     public static Result login(){
