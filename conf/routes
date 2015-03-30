@@ -3,14 +3,21 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.main()
+GET         /                    controllers.Application.main()
 
-GET		/login						controllers.Application.login()
+GET         /login               controllers.Application.login()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET         /assets/*file        controllers.Assets.at(path="/public", file)
 
-POST 	/login						controllers.Application.authenticate() 
-GET 	/team						controllers.Application.team()
-GET		/vote						controllers.Application.vote()
-GET		/result 					controllers.Application.result()
+POST        /login               controllers.Application.authenticate()
+GET         /team                controllers.Application.team()
+GET         /vote                controllers.Application.vote()
+GET         /result              controllers.Application.result()
+POST        /newteam             controllers.TeamController.getAddteam()
+GET         /newteam             controllers.Application.addTeam()
+POST        /newaccount          controllers.Register.getAddAccount()
+GET         /newaccount          controllers.Application.addAccount()
+POST        /newtopic            controllers.TopicController.getAddtopic()
+GET         /newtopic           controllers.Application.addTopic()
+
