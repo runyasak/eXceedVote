@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   javaEbean,
   cache,
   javaWs,
-  "org.mariadb.jdbc" % "mariadb-java-client" % "1.1.8"
+  "org.mariadb.jdbc" % "mariadb-java-client" % "1.1.8",
+  "mysql" % "mysql-connector-java" % "5.1.18"
 )

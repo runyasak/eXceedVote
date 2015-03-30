@@ -1,11 +1,7 @@
 @REM activator launcher script
 @REM
-<<<<<<< HEAD
-@REM Envioronment:
-=======
 @REM Environment:
 @REM In order for Activator to work you must have Java available on the classpath
->>>>>>> origin/master
 @REM JAVA_HOME - location of a JDK home dir (optional if java on path)
 @REM CFG_OPTS  - JVM options (optional)
 @REM Configuration:
@@ -34,11 +30,8 @@ if defined var1 (
     echo SBT_OPTS           Environment variable, if unset uses ""
     echo ACTIVATOR_OPTS     Environment variable, if unset uses ""
     echo.
-<<<<<<< HEAD
-=======
     echo Please note that in order for Activator to work you must have Java available on the classpath
     echo.
->>>>>>> origin/master
     goto :end
   )
 )
@@ -50,11 +43,7 @@ if "%ACTIVATOR_HOME%"=="" (
 )
 
 set ERROR_CODE=0
-<<<<<<< HEAD
-set APP_VERSION=1.2.12
-=======
 set APP_VERSION=1.3.2
->>>>>>> origin/master
 set ACTIVATOR_LAUNCH_JAR=activator-launch-%APP_VERSION%.jar
 
 rem Detect if we were double clicked, although theoretically A user could
@@ -100,12 +89,8 @@ if "%_JAVACMD%"=="" set _JAVACMD=java
 
 rem Detect if this java is ok to use.
 for /F %%j in ('"%_JAVACMD%" -version  2^>^&1') do (
-<<<<<<< HEAD
-  if %%~j==Java set JAVAINSTALLED=1
-=======
   if %%~j==java set JAVAINSTALLED=1
   if %%~j==openjdk set JAVAINSTALLED=1
->>>>>>> origin/master
 )
 
 rem Detect the same thing about javac
