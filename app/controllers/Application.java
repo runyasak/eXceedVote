@@ -50,10 +50,12 @@ public class Application extends Controller {
         return ok(result.render("5"));
     }
     public static Result vote(){
-        return ok(vote.render());
+
+        return ok(vote.render( Topic.find.all()));
     }
-    public static Result voteTeam(){
-        return ok(voteTeam.render());
+    public static Result voteTeam(Long id){
+        Topic temp_topic = Topic.findTopicID(id);
+        return ok(voteTeam.render(Team.find.all(),temp_topic));
     }
 
     public static Result addTeam(){
