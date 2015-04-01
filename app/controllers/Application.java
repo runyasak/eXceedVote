@@ -46,8 +46,7 @@ public class Application extends Controller {
     }
 
     public static Result result(){
-
-        return ok(result.render("5"));
+        return ok(result.render(Team.find.all(),Topic.find.all()));
     }
     public static Result vote(){
         return ok(vote.render());

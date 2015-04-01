@@ -1,4 +1,4 @@
-@(message: String)
+@(listteam:List[Team])(listtopic:List[Topic])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/result.css")">
 }
@@ -13,25 +13,10 @@
 <div class="uk-align-center" data-uk-grid-margin="" id = "tabs">
 
             <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
-                  <li class="uk-active"><a href="#">
-                        Creativity Score
-                  </a></li>
+                  @listtopic.map{ topic=> 
+                        <li class=""><a href="#">@topic.topic_name</a></li>
 
-                  <li class=""><a href="#">
-                        Design Score
-                  </a></li>
-
-                  <li class=""><a href="#">
-                        Usability Score
-                  </a></li>
-
-                  <li class=""><a href="#">
-                        Best Project Vote
-                  </a></li>
-
-                  <li class=""><a href="#">
-                        Best Design Vote
-                  </a></li>
+                  }
 
                   <div class="uk-dropdown uk-dropdown-small">
                         <ul class="uk-nav uk-nav-dropdown">
@@ -40,40 +25,30 @@
             </ul>
 
             <ul id="tab-content" class="uk-switcher uk-margin">
-            <li class="">
-                  <div>
-                        <table class="uk-table">
-                              <thead> 
-                                    <tr>
-                                          <th>Team Names</th>
-                                          <th>Scores</th>
-                                    </tr>
-                              </thead>
-                              <tbody>
-                                    <tr>
-                                          <td>Job Kark</td>
-                                          <td>0</td>
-                                    </tr>
-                                    <tr>
-                                          <td>Job Kark</td>
-                                          <td>0</td>
-                                    </tr>
-                                    <tr>
-                                          <td>Job Kark</td>
-                                          <td>0</td>
-                                    </tr>
-                                    <tr>
-                                          <td>Job Kark</td>
-                                          <td>0</td>
-                                    </tr>
-                                    <tr>
-                                          <td>World</td>
-                                          <td>0</td>
-                                    </tr>
-                              </tbody>
-                        </table>
-
-      </div>
+                  @for(i <- 1 to listtopic.size) {
+                        <li class="data-uk-switcher-item="@i"">
+                              <div>
+                                    <table class="uk-table">
+                                    <thead> 
+                                          <tr>
+                                                <th>Team Names</th>
+                                                <th>Scores</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody>
+                                          @listteam.map{ team=>
+                                                <tr>
+                                                      <td>@team.team_name</td>
+                                                      <td></td>
+                                                </tr>
+                                          }
+                                    </tbody>
+                              </table>
+                              </div>
+                        </li>
+                  }
+            
+            </ul>
 </div>
 </div>
 
