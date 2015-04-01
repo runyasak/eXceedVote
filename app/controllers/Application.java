@@ -73,7 +73,6 @@ public class Application extends Controller {
     			
     			return "Invalid user or password";
     			
-    			
     		}
     		
     		return null;
