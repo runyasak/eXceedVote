@@ -30,6 +30,11 @@ public class Team extends Model {
         return Team.find.where().eq("team_name", team).findUnique();
 
     }
+    public static Team findTeamID(Long id){
+
+        return Team.find.where().eq("ID", id).findUnique();
+
+    }
 
 
 }

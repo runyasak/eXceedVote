@@ -20,7 +20,16 @@ public class Topic extends Model {
     public List<Vote_Categories> vote_cate;
 
     public static Finder<Long,Topic> find=new Finder<Long,Topic>(Long.class,Topic.class);
+    public static Topic findTopic(String topic){
 
+        return Topic.find.where().eq("topic_name", topic).findUnique();
+
+    }
+    public static Topic findTopicID(Long topic_id){
+
+        return Topic.find.where().eq("ID", topic_id).findUnique();
+
+    }
 
 
 }
