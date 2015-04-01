@@ -26,7 +26,7 @@
  var obj =jQuery.parseJSON('{'+text+'}');
  $.post( "/vote_receive" , obj , function( data ){});
  console.log(obj);
- //window.location.replace ( "@routes.Application.main()" );
+ window.location.replace ( "@routes.Application.vote()" );
  }
 
 

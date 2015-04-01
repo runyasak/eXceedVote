@@ -22,4 +22,5 @@ public class Vote extends Model {
 
 
 
+
 }
