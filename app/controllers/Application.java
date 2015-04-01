@@ -52,6 +52,10 @@ public class Application extends Controller {
     public static Result vote(){
         return ok(vote.render());
     }
+    public static Result voteTeam(){
+        return ok(voteTeam.render());
+    }
+
     public static Result addTeam(){
 
         return ok(newteam.render());
