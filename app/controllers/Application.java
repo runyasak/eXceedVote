@@ -14,15 +14,18 @@ import models.*;
 public class Application extends Controller {
 
     public static Result main() {
-    	
-        return ok(main.render("5") );
+        int num_team=Team.find.all().size();
+
+        return ok(main.render(num_team,Team.find.all()) );
     }
     public static Result login(){
     	return ok(login.render(Form.form(Login.class)));
     	
     }
-    public static Result team(){
-        return ok(team.render("5"));
+    public static Result team(Long id){
+        Team temp_team = Team.findTeamID(id);
+
+        return ok(team.render(temp_team,Topic.find.all()));
     }
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
@@ -34,7 +37,6 @@ public class Application extends Controller {
     		
     		session().clear();
     		session("username",loginForm.get().username);
-
             System.out.println(session().get("username"));
     		return redirect(routes.Application.main());	
     			
@@ -44,11 +46,16 @@ public class Application extends Controller {
     }
 
     public static Result result(){
-            return ok(result.render("5"));
+
+        return ok(result.render("5"));
     }
     public static Result vote(){
         return ok(vote.render());
     }
+    public static Result voteTeam(){
+        return ok(voteTeam.render());
+    }
+
     public static Result addTeam(){
 
         return ok(newteam.render());
@@ -66,6 +73,7 @@ public class Application extends Controller {
     public static class Login{
     	public String username;
     	public String password;
+
    
     	public String validate(){
     		
