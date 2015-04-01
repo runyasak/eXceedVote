@@ -51,6 +51,10 @@ public class Application extends Controller {
     public static Result vote(){
         return ok(vote.render());
     }
+    public static Result voteTeam(){
+        return ok(voteTeam.render());
+    }
+
     public static Result addTeam(){
 
         return ok(newteam.render());
@@ -75,7 +79,6 @@ public class Application extends Controller {
     		if(Account.authenticate(username,password)==null){
     			
     			return "Invalid user or password";
-    			
     			
     		}
     		

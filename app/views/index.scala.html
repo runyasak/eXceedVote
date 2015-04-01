@@ -14,6 +14,13 @@
 <script src="@routes.Assets.at("uikit/js/components/slideshow-fx.js")" type="text/javascript"></script>
 <link rel="stylesheet" href="@routes.Assets.at("uikit/css/components/slideshow.css")">
 <link rel="stylesheet" href="@routes.Assets.at("uikit/css/components/slidenav.css")">
+<style type="text/css">
+    #footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+</style>
 @css
 </head>
 <body>
@@ -25,7 +32,7 @@
     </ul>
     <div class="uk-navbar-flip">
         <ul class="uk-navbar-nav">
-            <li><a class="uk-text-large" style="color: #00CFFF" href="#"><b>sign</b> out</a></li>
+            <!-- <li><a class="uk-text-large" style="color: #00CFFF" href="#"><b>sign</b> out</a></li> -->
         </ul>
     </div>
 </nav>
@@ -42,13 +49,13 @@
 
 <br>
 <br>
-<nav class="uk-navbar" style="background-color: #151515;">
+<nav id="footer" class="uk-navbar" style="background-color: #151515;">
     <ul class="uk-navbar-nav">
     	<li></li>
     </ul>
-    <div class="uk-navbar-flip">
+    <div  class="uk-navbar-flip">
         <ul class="uk-navbar-nav">
-            <li class="uk-text-medium" style="color: #FFFFFF" href="#"> <-- <b>Developed by :</b> Ping Kai Studio --> </li>&nbsp&nbsp
+            <li class="uk-text-bottom" style="color: #FFFFFF" href="#"> <-- <b>Developed by :</b> Ping Kai Studio --> </li>&nbsp&nbsp
         </ul>
     </div>
 </nav>
