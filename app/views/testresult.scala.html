@@ -5,11 +5,17 @@
   <title></title>
 </head>
 <body>
-    <div></div>
+    <div>VOTE</div>
         @result.map{ res =>
 
-            <div>@res.toString</div>
-
+            <div>team_id : @res.teams.team_name</div>
+            <div>users_id : @res.users.username</div>
+            <div>vote_cate :@res.vote_cate.topics.topic_name</div>
+            <div>----------------------------------</div>
         }
+
+
+
+
 </body>
 </html>

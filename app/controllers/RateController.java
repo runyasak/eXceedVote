@@ -7,7 +7,9 @@ import models.Vote;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.testresult2;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -65,6 +67,23 @@ public class RateController extends Controller{
         else return ok();
 
 
+    }
+
+    public static List<Rate> resultRate(){
+//        String sql = "SELECT vote.teams_id, COUNT(vote.teams_id)  FROM vote INNER JOIN vote_categories ON vote.vote_cate_id=vote_categories.id INNER JOIN topic ON vote_categories.topics_id = topic.id WHERE topic.topic_name = \"Beautiful\"GROUP BY vote.teams_id ";
+//        RawSql rawsql= RawSqlBuilder.parse(sql).columnMapping("vote.teams_id","teams_id").create();
+//
+//        Query query = Ebean.find(Vote.class);
+//        query.setRawSql(rawsql);
+//        List list = query.findList();
+
+        return Rate.find.all();
+
+
+    }
+    public static Result showResult(){
+
+        return ok(testresult2.render(resultRate()));
     }
 
 
