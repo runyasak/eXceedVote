@@ -72,14 +72,15 @@ public class VoteController extends Controller{
 
 
     }
-    public static List resultVote(){
+    public static List<Vote> resultVote(){
 //        String sql = "SELECT vote.teams_id, COUNT(vote.teams_id)  FROM vote INNER JOIN vote_categories ON vote.vote_cate_id=vote_categories.id INNER JOIN topic ON vote_categories.topics_id = topic.id WHERE topic.topic_name = \"Beautiful\"GROUP BY vote.teams_id ";
 //        RawSql rawsql= RawSqlBuilder.parse(sql).columnMapping("vote.teams_id","teams_id").create();
 //
 //        Query query = Ebean.find(Vote.class);
 //        query.setRawSql(rawsql);
 //        List list = query.findList();
-        return null;
+
+        return Vote.find.all();
 
 
     }
