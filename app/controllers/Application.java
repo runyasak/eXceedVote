@@ -12,7 +12,7 @@ import views.html.*;
 import models.*;
 
 public class Application extends Controller {
-
+    @Security.Authenticated(Secured.class)
     public static Result main() {
         int num_team=Team.find.all().size();
 
