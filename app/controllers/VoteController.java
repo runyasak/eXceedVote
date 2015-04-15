@@ -11,6 +11,7 @@ import models.Vote;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.testresult;
 
 import java.util.List;
@@ -84,6 +85,7 @@ public class VoteController extends Controller{
 
 
     }
+    @Security.Authenticated(Secured.class)
     public static Result showResult(){
 
         return ok(testresult.render(resultVote()));

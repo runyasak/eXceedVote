@@ -4,12 +4,14 @@ import models.*;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.login;
 
 /**
  * Created by R7 on 3/25/2015.
  */
 public class TeamController extends Controller {
+    @Security.Authenticated(Secured.class)
     public static Result main(){
         return redirect(routes.Application.main());
     }

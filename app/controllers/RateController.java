@@ -7,6 +7,7 @@ import models.Vote;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.testresult2;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 
 public class RateController extends Controller{
+
     public static Result main(){
         return redirect(routes.Application.main());
     }
@@ -81,6 +83,7 @@ public class RateController extends Controller{
 
 
     }
+    @Security.Authenticated(Secured.class)
     public static Result showResult(){
 
         return ok(testresult2.render(resultRate()));
