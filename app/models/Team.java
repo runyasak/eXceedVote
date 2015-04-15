@@ -15,6 +15,7 @@ public class Team extends Model {
     @Id
     public Long ID;
     public String team_name;
+    public String description;
 
     @OneToMany(mappedBy = "teams")
     public List<Account> users;

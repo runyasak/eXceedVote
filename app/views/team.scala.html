@@ -40,7 +40,7 @@
     var obj =jQuery.parseJSON('{'+text+'}');
     $.post( "/rate_receive" , obj , function( data ){});
     console.log(obj);
-  //      window.location.replace ( "@routes.Application.main()" );
+     window.location.replace ( "@routes.Application.main()" );
     }
 
 
@@ -59,7 +59,7 @@
         </div>
     </div>
     <div class="uk-container-center uk-text-center">
-        <div class="uk-text-large" id="whiteText">  <b>@team.team_name</b> <br> by SKE12 </div>
+        <div class="uk-text-large" id="whiteText">  <b>@team.team_name</b> <br> Description : @team.description </div>
         <div class="uk-text-large" id="whiteText">
              @listtopic.map{ topic =>
                <span id="blueText"> @topic.topic_name: </span>
