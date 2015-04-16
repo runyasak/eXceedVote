@@ -1,11 +1,81 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-  <meta charset="UTF-8">
-  <title></title>
-</head>
-<body>
+@(title: String)(css: Html)(content: Html)
 
-    
-</body>
+<!DOCTYPE html>
+
+<html style="size: 100% 100%; ">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@title</title>
+        <script src="@routes.Assets.at("uikit/js/jquery.js")" type="text/javascript"></script>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("uikit/css/uikit.min.css")">
+        <script src="@routes.Assets.at("uikit/js/uikit.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/js/typed.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("uikit/js/components/slideshow.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("uikit/js/components/slideshow-fx.js")" type="text/javascript"></script>
+        <link rel="stylesheet" href="@routes.Assets.at("uikit/css/components/slideshow.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("uikit/css/components/slidenav.css")">
+        <style type="text/css">
+        #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        }
+        #menu li a{
+        display: block;
+        padding: 5px 10px;
+        background: #333;
+        text-decoration: none;
+        }
+        #menu li a:hover{
+
+        background: #2F2D2D;
+        }
+
+        </style>
+
+        @css
+    </head>
+    <body>
+            <!-- head -->
+        <nav class="uk-navbar" style="background-color: #151515; padding: 0.5%">
+            <ul class="uk-navbar-nav">
+                <li><a href="#my-id" class="uk-navbar-toggle" style="color: #00CFFF" data-uk-offcanvas></a></li>
+                <li><a class="uk-text-large" style="color: #00CFFF" href="/"><b>eXceed</b> vote</a></li>
+            </ul>
+            <div class="uk-navbar-flip">
+                <ul class="uk-navbar-nav">
+                        <!-- <li><a class="uk-text-large" style="color: #00CFFF" href="#"><b>sign</b> out</a></li> -->
+                </ul>
+            </div>
+        </nav>
+        <div id="my-id" class="uk-offcanvas  uk-text-center " style="">
+            <div class="uk-offcanvas-bar ">
+                <ul id="menu" class="uk-list uk-list-line " style="text-align: left; " >
+                    <li style="border-top: 1px solid #5F5F5F ;  "><a href="/result"><i class="uk-icon-home uk-icon-large" style=" padding: 5px; color: #6b788b;" ></i><span style="margin-left: 20px; color: #b4bcc8 ;">Profile</span></a></li>
+                    <li style="border-top: 1px solid #5F5F5F ;  "><a href="/result"><i class="uk-icon-print uk-icon-large" style=" padding: 5px; color: #6b788b;"></i><span style="margin-left: 20px; color: #b4bcc8 ;">Result</span></a></li>
+                    <li style="border-top: 1px solid #5F5F5F ;  "><a href="/result"><i class="uk-icon-thumbs-o-up uk-icon-large" style=" padding: 5px; color: #6b788b;"></i><span style="margin-left: 20px; color: #b4bcc8 ;">Vote</span></a></li>
+                    <li style="border-top: 1px solid #5F5F5F ;  "><a href="/result"><i class="uk-icon-users uk-icon-large" style=" padding: 5px; color: #6b788b;"></i><span style="margin-left: 20px; color: #b4bcc8 ;">Add Team</span></a></li>
+                    <li style="border-top: 1px solid #5F5F5F ;  "><a href="/result"><i class="uk-icon-user-plus uk-icon-large" style=" padding: 5px; color: #6b788b;"></i><span style="margin-left: 20px; color: #b4bcc8 ;">Add Account</span></a></li>
+                    <li style="border-top: 1px solid #5F5F5F ;   border-bottom:1px solid #5F5F5F;"><a href="/result"><i class="uk-icon-plus uk-icon-large" style=" padding: 5px; color: #6b788b;"></i><span style="margin-left: 20px; color: #b4bcc8 ;">Add Topic</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+            <!-- end head -->
+            <!-- content -->
+        @content
+
+        <br>
+        <br>
+        <nav id="footer" class="uk-navbar" style="background-color: #151515;">
+            <ul class="uk-navbar-nav">
+                <li></li>
+            </ul>
+            <div  class="uk-navbar-flip">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-text-bottom" style="color: #FFFFFF" href="#"> <-- <b>Developed by :</b> Ping Kai Studio --> </li>&nbsp&nbsp
+                </ul>
+            </div>
+        </nav>
+    </body>
 </html>
