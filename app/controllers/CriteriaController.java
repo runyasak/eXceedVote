@@ -23,7 +23,7 @@ public class CriteriaController extends Controller{
     public static Result getAddCriteria(){
         Form<Rate_Criteria> newTopicForm = Form.form(Rate_Criteria.class).bindFromRequest();
         AddCriteria(newTopicForm.get().criteria_name);
-        System.out.println(newTopicForm.get().criteria_name);
+        //System.out.println(newTopicForm.get().criteria_name);
 
         return main();
 
