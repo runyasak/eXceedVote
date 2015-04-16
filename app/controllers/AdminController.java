@@ -14,9 +14,11 @@ import models.*;
 public class AdminController extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result main() {
+        int account_size = Account.find.all().size();
+        int team_size = Team.find.all().size();
+        int criteria_size= Rate_Criteria.find.all().size();
 
-
-        return ok(adminpage.render());
+        return ok(adminpage.render(account_size,team_size,criteria_size));
     }
 
 }
