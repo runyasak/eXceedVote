@@ -1,9 +1,8 @@
-@(listteam:List[Team])(listtopic:List[Topic])
+@(result: org.apache.commons.collections.map.MultiKeyMap)(rank: org.apache.commons.collections.map.MultiKeyMap)(listteam:List[Team])(listtopic:List[Topic])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/result.css")">
 }
 @index(title = "eXceed Vote")(css) {
-<!-- <navbar class =""href="https://www.google.com">test</nav> -->
 <div class="uk-text-center uk-text-large" id = "title">
       <div style="color:WHITE;">
             Result
@@ -33,13 +32,15 @@
                                           <tr>
                                                 <th>Team Names</th>
                                                 <th>Scores</th>
+                                                <th>Rank</th>
                                           </tr>
                                     </thead>
                                     <tbody>
                                           @listteam.map{ team=>
                                                 <tr>
                                                       <td>@team.team_name</td>
-                                                      <td></td>
+                                                      <td>@result.get(team.team_name, listtopic.get(i-1).topic_name)</td>
+                                                      <td>@rank.get(team.team_name, listtopic.get(i-1).topic_name)</td>
                                                 </tr>
                                           }
                                     </tbody>
@@ -47,7 +48,7 @@
                               </div>
                         </li>
                   }
-            
+
             </ul>
 </div>
 </div>
