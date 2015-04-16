@@ -10,11 +10,12 @@
     color: white;
 }
 
-#login-button{
+#logout-button{
     background-color: rgb(24, 23, 23);
-    color: rgb(17, 242, 208);
+    color: rgb(228, 19, 19);
     margin: 10px;
     margin-bottom: 10%;
+    font-size: 18px;
 }
 
 #register-button{
