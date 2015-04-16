@@ -48,7 +48,6 @@ public class RateController extends Controller{
     }
     public static Result receiveRate(){
         if (request().method().equals("POST")) {
-            //System.out.println("good");
             Map<String, String[]> map = request().body().asFormUrlEncoded();
             Long teams_id= Long.parseLong(map.get("teams_id")[0]);
 
@@ -56,10 +55,8 @@ public class RateController extends Controller{
                 String key = entry.getKey();
                 String[] value = entry.getValue();
                 if(!key.equals("teams_id")) {
-
                    saveRate(teams_id, Integer.parseInt(value[0]), Long.parseLong(key));
                 }
-                System.out.println("key "+ key+" value"+ value[0] );
 
             }
             return ok();

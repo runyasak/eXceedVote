@@ -1,8 +1,5 @@
 package controllers;
 
-
-
-
 import play.*;
 import play.api.mvc.Session;
 import play.mvc.*;
@@ -46,7 +43,7 @@ public class Application extends Controller {
     }
 
     public static Result result(){
-        return ok(result.render(Team.find.all(),Topic.find.all()));
+        return ok(result.render(Team.getRate(),Team.find.all()));
     }
     public static Result vote(){
 
