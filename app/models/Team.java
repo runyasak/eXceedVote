@@ -47,8 +47,10 @@ public class Team extends Model {
             for( int j = 1; j <= topicSize; j++){
                 String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
                 String topicName = Topic.find.where().eq("ID", j).findUnique().topic_name;
-                int score = sumScore(i,j);
-                map.put(teamName, topicName, score);
+                if( teamName!=null && topicName != null ){
+                    int score = sumScore(i,j);
+                    map.put(teamName, topicName, score);
+                }
             }
         }
         return map;
