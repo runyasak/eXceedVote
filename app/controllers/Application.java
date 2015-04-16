@@ -46,6 +46,10 @@ public class Application extends Controller {
     public static Result result(){
         return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all()));
     }
+     @Security.Authenticated(Secured.class)
+    public static Result voteResult(){
+        return ok(voteResult.render());
+    }
     @Security.Authenticated(Secured.class)
     public static Result vote(){
 
@@ -76,21 +80,19 @@ public class Application extends Controller {
     public static class Login{
     	public String username;
     	public String password;
-
-   
     	public String validate(){
-    		
     		if(Account.authenticate(username,password)==null){
-    			
     			return "Invalid user or password";
-    			
     		}
-    		
-    		return null;
-    		
-    		
+    		return null;    		
     	}
-    	
     }
 
+    public static Result logout() {
+        session().clear();
+        flash("success", "You have been logged out");
+        return redirect(
+            routes.Application.login()
+        );
+    }
 }
