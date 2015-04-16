@@ -9,6 +9,7 @@ import views.html.*;
 import models.*;
 
 public class Register extends Controller {
+    
 	public static Result main(){
 		return redirect(routes.Application.main());
 	}

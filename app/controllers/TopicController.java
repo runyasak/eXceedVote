@@ -8,6 +8,7 @@ import play.mvc.Result;
 
 
 public class TopicController extends Controller{
+
     public static Result main(){
         return redirect(routes.Application.main());
     }

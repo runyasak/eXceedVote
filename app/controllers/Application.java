@@ -19,6 +19,7 @@ public class Application extends Controller {
     	return ok(login.render(Form.form(Login.class)));
     	
     }
+    @Security.Authenticated(Secured.class)
     public static Result team(Long id){
         Team temp_team = Team.findTeamID(id);
 
@@ -41,28 +42,32 @@ public class Application extends Controller {
         
     	
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result result(){
         return ok(result.render(Team.getRate(),Team.find.all()));
     }
+    @Security.Authenticated(Secured.class)
     public static Result vote(){
 
         return ok(vote.render( Topic.find.all()));
     }
+    @Security.Authenticated(Secured.class)
     public static Result voteTeam(Long id){
         Topic temp_topic = Topic.findTopicID(id);
         return ok(voteTeam.render(Team.find.all(),temp_topic));
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result addTeam(){
+        
 
         return ok(newteam.render());
     }
+
     public static Result addAccount(){
 
         return ok(newaccount.render());
     }
-
+    @Security.Authenticated(Secured.class)
     public static Result addTopic(){
 
         return ok(newtopic.render());

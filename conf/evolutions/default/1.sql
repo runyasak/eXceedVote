@@ -30,6 +30,7 @@ create table rate_categories (
 create table team (
   id                        bigint auto_increment not null,
   team_name                 varchar(255),
+  description               varchar(255),
   constraint pk_team primary key (id))
 ;
 
