@@ -8,7 +8,7 @@ import views.html.*;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Map;
+import org.apache.commons.collections.map.MultiKeyMap;
 import java.util.HashMap;
 
 
@@ -39,23 +39,18 @@ public class Team extends Model {
         return Team.find.where().eq("ID", id).findUnique();
 
     }
-    public static Map getRate(){
+    public static MultiKeyMap getRate(){
         int teamSize = Team.find.all().size();
         int topicSize = Topic.find.all().size();
-        Map<String, Integer> map = new HashMap<String, Integer>();
+        MultiKeyMap map = new MultiKeyMap();
         for( int i = 1; i <= teamSize; i++){
-            String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
-            int score = sumScore(1,1);
-            map.put(teamName, score);
+            for( int j = 1; j <= topicSize; j++){
+                String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
+                String topicName = Topic.find.where().eq("ID", j).findUnique().topic_name;
+                int score = sumScore(i,j);
+                map.put(teamName, topicName, score);
+            }
         }
-        // String[] result = new String[teamSize];
-        // for(int i = 0; i < teamSize; i++){
-        //     result[i] = Team.find.select("team_name").where().eq("ID", i)+"";
-        //     result[i] += ","+Rate_Categories.find.select("Rate_Categories.score").where()
-        //                         .eq("Rate.teams_id", i)
-        //                         .eq("Rate.rate_cate", "Rate_Categories.id")
-        //                         .eq("Rate_Categories.topic_id", 0);
-        // }
         return map;
     }
 
@@ -71,9 +66,39 @@ public class Team extends Model {
                 if(r.teams.ID == teamId && rc.topics.ID == topicId){
                     score += rc.score;
                 }
-            }
+            } 
         }
         return score;
+    }
+
+    public static MultiKeyMap getRank(){
+        int teamSize = Team.find.all().size();
+        int topicSize = Topic.find.all().size();
+        MultiKeyMap map = new MultiKeyMap();
+        for( int i = 1; i <= teamSize; i++){
+            for( int j = 1; j <= topicSize; j++){
+                String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
+                String topicName = Topic.find.where().eq("ID", j).findUnique().topic_name;
+                int rank = calcRank(i,j);
+                map.put(teamName, topicName, rank);
+            }
+        }
+        return map;
+    }
+
+    public static int calcRank(int teamId, int topicId){
+        List<Rate> rate = new ArrayList<Rate>();
+        rate = Rate.find.all();
+        List<Rate_Categories> rateCate = new ArrayList<Rate_Categories>();
+        rateCate = Rate_Categories.find.all();
+        int rank = 1, score = sumScore(teamId, topicId);
+        for( Team t : Team.find.all() ){
+            int tempId = t.ID.intValue();
+            if( sumScore( tempId, topicId ) > score ){
+                rank++;
+            }
+        }
+        return rank;
     }
 
 }

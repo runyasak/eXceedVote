@@ -1,4 +1,4 @@
-@(result: Map[String, Int])(listteam:List[Team])
+@(result: org.apache.commons.collections.map.MultiKeyMap)(rank: org.apache.commons.collections.map.MultiKeyMap)(listteam:List[Team])(listtopic:List[Topic])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/result.css")">
 }
@@ -11,9 +11,9 @@
 <div class="uk-grid ">
 <div class="uk-align-center" data-uk-grid-margin="" id = "tabs">
 
-            <!-- <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
-                  //listtopic.map{ topic=> 
-                        <li class=""><a href="#">//topic.topic_name</a></li>
+            <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
+                  @listtopic.map{ topic=> 
+                        <li class=""><a href="#">@topic.topic_name</a></li>
 
                   }
 
@@ -21,24 +21,26 @@
                         <ul class="uk-nav uk-nav-dropdown">
                         </ul>
                   </div>
-            </ul> -->
+            </ul>
 
-            <!-- <ul id="tab-content" class="uk-switcher uk-margin">
-                  //for(i <- 1 to listtopic.size) {
-                        <li class="data-uk-switcher-item="//i"">
+            <ul id="tab-content" class="uk-switcher uk-margin">
+                  @for(i <- 1 to listtopic.size) {
+                        <li class="data-uk-switcher-item="@i"">
                               <div>
                                     <table class="uk-table">
                                     <thead> 
                                           <tr>
                                                 <th>Team Names</th>
                                                 <th>Scores</th>
+                                                <th>Rank</th>
                                           </tr>
                                     </thead>
                                     <tbody>
-                                          //listteam.map{ team=>
+                                          @listteam.map{ team=>
                                                 <tr>
-                                                      <td>//team.team_name</td>
-                                                      <td></td>
+                                                      <td>@team.team_name</td>
+                                                      <td>@result.get(team.team_name, listtopic.get(i-1).topic_name)</td>
+                                                      <td>@rank.get(team.team_name, listtopic.get(i-1).topic_name)</td>
                                                 </tr>
                                           }
                                     </tbody>
@@ -46,11 +48,8 @@
                               </div>
                         </li>
                   }
-            </ul> -->
-            @listteam.map{ team=>
-                  @team.team_name : @result.get(team.team_name)
-                  <br>
-            }
+
+            </ul>
 </div>
 </div>
 
