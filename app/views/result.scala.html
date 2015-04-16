@@ -1,11 +1,10 @@
-@(listteam:List[Team])(listtopic:List[Topic])
+@(result: org.apache.commons.collections.map.MultiKeyMap)(rank: org.apache.commons.collections.map.MultiKeyMap)(listteam:List[Team])(listcriteria:List[Rate_Criteria])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/result.css")">
 }
-@index(title = "eXceed Vote")(css) {
-<!-- <navbar class =""href="https://www.google.com">test</nav> -->
+@admin(title = "eXceed Vote")(css) {
 <div class="uk-text-center uk-text-large" id = "title">
-      <div style="color:WHITE;">
+      <div >
             Result
       </div>
 </div>
@@ -13,8 +12,8 @@
 <div class="uk-align-center" data-uk-grid-margin="" id = "tabs">
 
             <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
-                  @listtopic.map{ topic=> 
-                        <li class=""><a href="#">@topic.topic_name</a></li>
+                  @listcriteria.map{ criteria=>
+                        <li class=""><a href="#">@criteria.criteria_name</a></li>
 
                   }
 
@@ -25,7 +24,7 @@
             </ul>
 
             <ul id="tab-content" class="uk-switcher uk-margin">
-                  @for(i <- 1 to listtopic.size) {
+                  @for(i <- 1 to listcriteria.size) {
                         <li class="data-uk-switcher-item="@i"">
                               <div>
                                     <table class="uk-table">
@@ -33,13 +32,15 @@
                                           <tr>
                                                 <th>Team Names</th>
                                                 <th>Scores</th>
+                                                <th>Rank</th>
                                           </tr>
                                     </thead>
                                     <tbody>
                                           @listteam.map{ team=>
                                                 <tr>
                                                       <td>@team.team_name</td>
-                                                      <td></td>
+                                                      <td>@result.get(team.team_name, listcriteria.get(i-1).criteria_name)</td>
+                                                      <td>@rank.get(team.team_name, listcriteria.get(i-1).criteria_name)</td>
                                                 </tr>
                                           }
                                     </tbody>
@@ -47,7 +48,7 @@
                               </div>
                         </li>
                   }
-            
+
             </ul>
 </div>
 </div>

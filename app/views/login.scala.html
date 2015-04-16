@@ -3,7 +3,11 @@
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 }
 @index("Login Page")(css) {
-	
+	@if(flash.contains("success")) {
+	    <p class="success">
+	        <script type="text/javascript"> alert("@flash.get("success")") </script>
+	    </p>
+	}
 	@helper.form(routes.Application.authenticate){
 			<!-- <h1>Sign in</h1>
 			@if(form.hasGlobalErrors){
