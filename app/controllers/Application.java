@@ -82,6 +82,11 @@ public class Application extends Controller {
 
         return ok(newcategory.render());
     }
+    public static Result editTeam(Long id){
+        Team editTeam =Team.findTeamID(id);
+        System.out.println("");
+        return ok(editteam.render(editTeam));
+    }
     
     public static class Login{
     	public String username;
