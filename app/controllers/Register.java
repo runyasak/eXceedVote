@@ -34,6 +34,13 @@ public class Register extends Controller {
 
     }
 
+    public static Result getEditTeam (){
+        
+
+        return main();
+
+    }
+
     public static Result editTeam(String username,String team){
 
 
