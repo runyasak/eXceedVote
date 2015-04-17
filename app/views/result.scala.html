@@ -1,4 +1,4 @@
-@(result: org.apache.commons.collections.map.MultiKeyMap)(rank: org.apache.commons.collections.map.MultiKeyMap)(listteam:List[Team])(listcriteria:List[Rate_Criteria])(listcategories:List[Vote_Categories])(vote: List[Integer])
+@(result: org.apache.commons.collections.map.MultiKeyMap)(rank: org.apache.commons.collections.map.MultiKeyMap)(listteam:List[Team])(listcriteria:List[Rate_Criteria])(listcategories:List[Vote_Categories])(vote: List[String])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/result.css")">
 }
@@ -53,13 +53,15 @@
                   <b>Vote Result</b><br><br>
                   @listcategories.map{ cate=>
                         <div>
-                                    Vote Categories : @cate.categories_name    
-                                    Team : @listteam.get(vote.get(cate.ID.toInt-1)).team_name
+                                    Vote Categories : @cate.categories_name |
+                                    Team : @vote.get( cate.ID.toInt-1 )
                               <br>
                         </div>
                   }
+                  @vote.map{ v =>
+                        @v
+                  }
 </div>
 </div>
-
 
 }

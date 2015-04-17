@@ -103,28 +103,36 @@ public class Team extends Model {
         return rank;
     }
 
-    public static List<Integer> getVote(){
+    public static List<String> getVote(){
         int topicSize = Vote_Categories.find.all().size();
+        int teamSize = Team.find.all().size();
         List<Vote> vote = new ArrayList<Vote>();
         int[][] teamCount = new int[topicSize][Team.find.all().size()];
         vote = Vote.find.all();
-        for( int i = 1; i < topicSize; i++ ) {
+        for( int i = 0; i < topicSize; i++ ) {
             for( Vote v : vote ) {
-                if( v.vote_rec.categories.ID == i ) {
+                if( v.vote_rec.categories.ID == i+1 ) {
                     teamCount[i][v.teams.ID.intValue()-1]++;
                 }
             }
         }
         int max = 0, team = 0;
-        List<Integer> voteResult = new ArrayList<Integer>();
-        for( int topicIndex = 0; topicIndex < teamCount.length; topicIndex++ ){
-            for( int teamIndex = 0; teamIndex < teamCount[0].length; teamIndex++ ) {
+        List<String> voteResult = new ArrayList<String>();
+        for( int topicIndex = 0; topicIndex < topicSize; topicIndex++ ){
+            max = 0;
+            team = 0;
+            for( int teamIndex = 0; teamIndex < teamSize; teamIndex++ ) {
                 if( max < teamCount[topicIndex][teamIndex] ) {
                     max = teamCount[topicIndex][teamIndex];
                     team = teamIndex+1;
                 }
             }
-            voteResult.add(team);
+            if( team == 0 ) {
+                voteResult.add("Unknown.");
+            }
+            else {
+                voteResult.add(Team.find.where().eq("ID", team).findUnique().team_name);
+            }
         }
         return voteResult;
     }
