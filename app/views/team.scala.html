@@ -1,4 +1,4 @@
-@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])
+@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(currentRate:List[Integer])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">
     <script src="@routes.Assets.at("ckeditor/ckeditor.js")"></script>
@@ -6,7 +6,6 @@
 @index("eXceed Vote")(css) {
     <!-- content -->
     <script>
-
     function star(id) {
         var str = id.split("-");
         var j;
@@ -22,7 +21,6 @@
 
 
     function post(){
-    //console.log(1+1);
     var i=0;
     var text="";
     text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
@@ -32,11 +30,8 @@
     text += ",\""+"@criteria.ID"+"\""+": "+ "\""+value_i+"\"";
 
     }
-    console.log(text);
-
     var obj =jQuery.parseJSON('{'+text+'}');
     $.post( "/rate_receive" , obj , function( data ){});
-    console.log(obj);
     window.location.replace ( "@routes.Application.main()" );
     }
 
@@ -137,4 +132,9 @@
         </form>
         <br>
     </div>
+    <script>
+        @listcriteria.map{ criteria =>
+            star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+        }
+    </script>
 }
