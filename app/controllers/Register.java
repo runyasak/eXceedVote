@@ -34,8 +34,21 @@ public class Register extends Controller {
 
     }
 
+    public static Result editInfo(String username,String name,String lastname,String studentID){
+        Account newAccount=Account.findAccount(username);
+        newAccount.name = name;
+        newAccount.lastname = lastname;
+        newAccount.studentID = studentID;
+        newAccount.save();
+
+        return main();
+    }
+
     public static Result getEditTeam (){
         Form<Team> newAccountForm = Form.form(Team.class).bindFromRequest();
+
+        Form<Account> newAccount = Form.form(Account.class).bindFromRequest();
+        editInfo(session().get("username"),newAccount.get().name,newAccount.get().lastname,newAccount.get().studentID);
         //System.out.println(session().get("username"));
         //System.out.println(newAccountForm.get().team_name);
         editTeam(session().get("username"),newAccountForm.get().team_name);
