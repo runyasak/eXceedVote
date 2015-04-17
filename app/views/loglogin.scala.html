@@ -1,0 +1,21 @@
+@(result:List[Log])
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+    </head>
+    <body>
+        <div>Login</div>
+        @result.map{ res =>
+
+            <div>username : @res.username</div>
+            <div>Time : @res.date</div>
+
+            <div>--------------------------------------------</div>
+        }
+
+
+
+
+    </body>
+</html>
