@@ -22,10 +22,9 @@ public class VoteController extends Controller{
     public static Result main(){
         return redirect(routes.Application.main());
     }
-    public static Result saveVote(Long teams_id,Long topic_id){
+    public static Result saveVote(Long teams_id,String topic_name){
         Vote newVote =new Vote();
-
-        Vote_Categories newTopic=Vote_Categories.findTopicID(topic_id);
+        Vote_Categories newTopic=Vote_Categories.findTopic(topic_name);
         Account newAccount=Account.findAccount(session().get("username"));
 
         Team newTeam = Team.findTeamID(teams_id);
@@ -62,7 +61,7 @@ public class VoteController extends Controller{
                 String[] value = entry.getValue();
                 if(!key.equals("teams_id")) {
 
-                    saveVote(teams_id, Long.parseLong(value[0]));
+                    saveVote(teams_id,value[0]);
                 }
                 System.out.println("key "+ key+" value"+ value[0] );
 

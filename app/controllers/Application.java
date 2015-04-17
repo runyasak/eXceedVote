@@ -23,7 +23,8 @@ public class Application extends Controller {
     public static Result team(Long id){
         Team temp_team = Team.findTeamID(id);
 
-        return ok(team.render(temp_team,Rate_Criteria.find.all()));
+
+        return ok(team.render(temp_team,Rate_Criteria.find.all(),Vote_Categories.find.all(),Account.findAccountTeam(id)));
     }
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
@@ -75,6 +76,11 @@ public class Application extends Controller {
     public static Result addTopic(){
 
         return ok(newtopic.render());
+    }
+    @Security.Authenticated(Secured.class)
+    public static Result addCategory(){
+
+        return ok(newcategory.render());
     }
     
     public static class Login{
