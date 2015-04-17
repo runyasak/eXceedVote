@@ -9,16 +9,18 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.testresult2;
-
 import java.util.List;
 import java.util.Map;
-
+import com.avaje.ebean.SqlUpdate;
+import com.avaje.ebean.Ebean;
+import java.util.ArrayList;
 
 public class RateController extends Controller{
 
     public static Result main(){
         return redirect(routes.Application.main());
     }
+
     public static Result saveRate(Long teams_id,int score ,Long topic_id){
         Rate newRate =new Rate();
         Rate_Criteria newTopic=Rate_Criteria.findTopicID(topic_id);
@@ -37,8 +39,20 @@ public class RateController extends Controller{
         
         rate_rec.save();
         newRate.save();
+
         return ok();
     }
+
+    public static Result updateRate(Long rateRecID, int score){
+        String s = "UPDATE rate_records set score = :count where id = :id";
+        SqlUpdate update = Ebean.createSqlUpdate(s);
+        update.setParameter("id", rateRecID);
+        update.setParameter("count", score);
+        Ebean.execute(update);
+
+        return ok();
+    }
+
     public static Result receiveRate(){
         if (request().method().equals("POST")) {
             Map<String, String[]> map = request().body().asFormUrlEncoded();
@@ -48,15 +62,22 @@ public class RateController extends Controller{
                 String key = entry.getKey();
                 String[] value = entry.getValue();
                 if(!key.equals("teams_id")) {
-                   saveRate(teams_id, Integer.parseInt(value[0]), Long.parseLong(key));
+                    int accountID = Account.findAccount(session().get("username")).ID.intValue();
+                    List<Rate> rate = new ArrayList<Rate>();
+                    rate = Rate.find.where().eq("users_id", accountID).eq("teams_id", teams_id).findList();
+                    for( Rate r : rate ) {
+                        if( r.rate_rec.criteria.ID.intValue() == Integer.parseInt(key) ){
+                            updateRate( r.rate_rec.ID, Integer.parseInt(value[0]) );
+                            return ok();
+                        }
+                    }
+                    saveRate(teams_id, Integer.parseInt(value[0]), Long.parseLong(key));
                 }
 
             }
             return ok();
         }
         else return ok();
-
-
     }
 
     public static List<Rate> resultRate(){
@@ -68,9 +89,8 @@ public class RateController extends Controller{
 //        List list = query.findList();
 
         return Rate.find.all();
-
-
     }
+
     @Security.Authenticated(Secured.class)
     public static Result showResult(){
 
