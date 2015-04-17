@@ -57,7 +57,7 @@ public class RateController extends Controller{
         if (request().method().equals("POST")) {
             Map<String, String[]> map = request().body().asFormUrlEncoded();
             Long teams_id= Long.parseLong(map.get("teams_id")[0]);
-
+            boolean isRated;
             for (Map.Entry<String, String[]> entry : map.entrySet()) {
                 String key = entry.getKey();
                 String[] value = entry.getValue();
@@ -65,15 +65,18 @@ public class RateController extends Controller{
                     int accountID = Account.findAccount(session().get("username")).ID.intValue();
                     List<Rate> rate = new ArrayList<Rate>();
                     rate = Rate.find.where().eq("users_id", accountID).eq("teams_id", teams_id).findList();
+                    isRated = false;
                     for( Rate r : rate ) {
                         if( r.rate_rec.criteria.ID.intValue() == Integer.parseInt(key) ){
                             updateRate( r.rate_rec.ID, Integer.parseInt(value[0]) );
-                            return ok();
+                            isRated = true;
+                            break;
                         }
                     }
-                    saveRate(teams_id, Integer.parseInt(value[0]), Long.parseLong(key));
+                    if( !isRated ){
+                        saveRate(teams_id, Integer.parseInt(value[0]), Long.parseLong(key));
+                    }
                 }
-
             }
             return ok();
         }
