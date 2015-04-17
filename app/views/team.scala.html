@@ -104,7 +104,8 @@
                 <div style="color:#00CFFF;"><b>Vote</b></div>
             }
             @listcategory.map{ category=>
-                <a id="@category.categories_name"onclick="post_vote(this.id)">@category.categories_name</a>
+                <a id="@category.categories_name" onclick="post_vote(this.id)">@category.categories_name</a>
+                <span id="@category.categories_name-check" style="position: absolute;"></span>
                 <br>
             }
         </div>
@@ -134,11 +135,16 @@
         <br>
     </div>
     <script>
-        @listcriteria.map{ criteria =>
-            star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+        @if( currentRate.size != 0){
+            @listcriteria.map{ criteria =>
+                star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+            }
         }
-        @currentVote.map{ current =>
-            document.getElementById("@listcategory.get(current-1).categories_name").style.color="rgb(242, 17, 43)";
+        @if( currentVote.size != 0 ){
+            @currentVote.map{ current =>
+                document.getElementById("@listcategory.get(current-1).categories_name").style.color="rgb(242, 17, 43)";
+                document.getElementById("@listcategory.get(current-1).categories_name-check").className="uk-icon-check";
+            }
         }
     </script>
 }
