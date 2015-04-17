@@ -1,6 +1,7 @@
 @(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])
 @css = {
-    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">    
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">
+    <script src="@routes.Assets.at("ckeditor/ckeditor.js")"></script>
 }
 @index("eXceed Vote")(css) {
     <!-- content -->
@@ -79,7 +80,7 @@
         </div>
     </div>
     <div class="uk-container-center uk-text-center">
-        <div class="uk-text-large" id="whiteText"> Project: <b>@team.project_name</b><br> <b>Team : @team.team_name</b> <br> Description : @team.description </div>
+        <div class="uk-text-large" id="whiteText"> Project: <b>@team.project_name</b><br> <b>Team : @team.team_name</b> <br> Description :@Html(team.description) </div>
         <div class="uk-text-large" id="whiteText">
             <b>Rate</b><br>
              @listcriteria.map{ criteria =>
