@@ -15,7 +15,7 @@
     }
     var i;
     for (i = 1; i <= parseInt(str[1]); i++) {
-    document.getElementById ( str[ 0 ] + "-" + i ).style.color = "yellow" ;
+    document.getElementById ( str[ 0 ] + "-" + i ).style.color = "#00CFFF" ;
     }
 
         document.getElementById("value-"+str[0]).value = str[1];
@@ -66,8 +66,8 @@
 
 
     </script>
-
-    <div class="uk-vertical-align-middle uk-text-center uk-width-1-1" style="padding-bottom:5%; background-size:100%">
+    <!-- <div class="uk-width-1-1" style="padding-top: 10%; background: url(@routes.Assets.at("images/cover-header.jpg"));"> -->
+    <div class="uk-vertical-align-middle uk-text-center uk-width-1-1" style="padding-bottom:25px; background-size:100%">
         <div class="uk-width-1-1-2" id="slide">
             <div class="uk-slidenav-position" style="height: 100%; width:100%;" data-uk-slideshow="{animation: 'swipe'}" >
                 <ul class="uk-slideshow">
@@ -79,32 +79,54 @@
             </div>
         </div>
     </div>
-    <div class="uk-container-center uk-text-center">
-        <div class="uk-text-large" id="whiteText"> Project: <b>@team.project_name</b><br> <b>Team : @team.team_name</b> <br> Description :@Html(team.description) </div>
-        <div class="uk-text-large" id="whiteText">
-            <b>Rate</b><br>
-             @listcriteria.map{ criteria =>
-               <span id="blueText"> @criteria.criteria_name: </span>
-               <input type="hidden" id="value-@criteria.criteria_name" value="0"></input>
 
+    <!-- </div> -->
+    <div id = "projectanddescription" class="uk-container-center uk-text-center">
+        <div class="uk-text-large whiteText"> 
+        <b id="projectName">@team.project_name</b>
+        <br>
+        <b id="teamName">by @team.team_name</b> 
+        <h2 id="DescriptionHeading">Description</h2>
+        @Html(team.description)
+        <p id="projectDescription"></p>
+        </div>
+
+
+        <div class="uk-text-large whiteText" >
+            <!-- <b>Rate</b><br> -->
+            <div id="rating">
+                 @listcriteria.map{ criteria =>
+                   <!-- separate this div into three smaller columns -->
+                   <div class="smallcol">
+                   <span class="blueText"> @criteria.criteria_name </span>
+                   </div>
+                   
+                   <div class="col">
+                   <input type="hidden" id="value-@criteria.criteria_name" value="0"></input>
                     @for(i <- 1 to 5){
                         <a class="uk-icon-star" id="@criteria.criteria_name-@i" style="color:white" onclick="star(this.id)"></a>
-                    } <a id="@criteria.criteria_name-0" style="color: #00CFFF" onclick="star(this.id)" >no vote</a>
-            <br>
-            }
-            <b>Vote</b><br>
+                    } 
+                    </div>
+
+                    <div class = "smallcol">
+                    <a id="@criteria.criteria_name-0" style="color: #00CFFF" onclick="star(this.id)" >no vote</a>
+                    </div>
+                    <br>
+                }
+            </div>
+            <!-- <b>Vote</b><br> -->
             @listcategory.map{ category=>
                 <a id="@category.categories_name"onclick="post_vote(this.id)">@category.categories_name</a>
-
-
+                <br>
             }
         </div>
         <br>
-        <button class="uk-button" type="submit" id="submitBtn" onclick="post()"> Submit </button>
-        <div class="uk-text-large uk-margin-bottom uk-margin-top" id="whiteText">
-                @if(listAccount.size!=0){
-                    <div><b>Members</b></div>
-                }
+
+        <button class="uk-button uk-button-primary" type="submit" id="submitBtn" onclick="post()"> Submit </button>
+        <div class="uk-text-large uk-margin-bottom uk-margin-top whiteText">
+             @if(listAccount.size!=0){
+                <div><b>Members</b></div>
+            }
                 @listAccount.map{ account=>
                     <div>@account.username</div>
 
@@ -112,12 +134,12 @@
 
         </div>
         <form>
-            <div id="whiteText"><h3 class="uk-text-large">COMMENT</h3><br>
-                <textarea id="form-s-t" cols="30" rows="5" placeholder="Comment Team" style="margin: 0px; width: 508px; height: 147px;"></textarea>
+            <div><b class="uk-text-large blueText">Comment</b><br>
+                <textarea id="form-s-t" cols="30" rows="5" placeholder="Comment Team"></textarea>
                 
             </div>
             <div>
-                <button class="uk-button" type="button">Comment</button>
+                <button class="uk-button uk-button-primary" type="button">Comment</button>
             </div>
         </form>
         <br>

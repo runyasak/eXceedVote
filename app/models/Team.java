@@ -103,4 +103,30 @@ public class Team extends Model {
         return rank;
     }
 
+    public static List<Integer> getVote(){
+        int topicSize = Vote_Categories.find.all().size();
+        List<Vote> vote = new ArrayList<Vote>();
+        int[][] teamCount = new int[topicSize][Team.find.all().size()];
+        vote = Vote.find.all();
+        for( int i = 1; i < topicSize; i++ ) {
+            for( Vote v : vote ) {
+                if( v.vote_rec.categories.ID == i ) {
+                    teamCount[i][v.teams.ID.intValue()-1]++;
+                }
+            }
+        }
+        int max = 0, team = 0;
+        List<Integer> voteResult = new ArrayList<Integer>();
+        for( int topicIndex = 0; topicIndex < teamCount.length; topicIndex++ ){
+            for( int teamIndex = 0; teamIndex < teamCount[0].length; teamIndex++ ) {
+                if( max < teamCount[topicIndex][teamIndex] ) {
+                    max = teamCount[topicIndex][teamIndex];
+                    team = teamIndex+1;
+                }
+            }
+            voteResult.add(team);
+        }
+        return voteResult;
+    }
+
 }
