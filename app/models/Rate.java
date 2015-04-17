@@ -19,7 +19,7 @@ public class Rate extends Model {
     @ManyToOne
     public Team teams;
     @ManyToOne
-    public  Rate_Records rate_rec;
+    public Rate_Records rate_rec;
 
     public static Finder<Long,Rate> find=new Finder<Long,Rate>(Long.class,Rate.class);
 

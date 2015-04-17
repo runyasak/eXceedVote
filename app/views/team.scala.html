@@ -1,4 +1,6 @@
-@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(account:Account)
+
+@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(currentRate:List[Integer])(currentVote:List[Integer])(account:Account)
+
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">
     <script src="@routes.Assets.at("ckeditor/ckeditor.js")"></script>
@@ -6,27 +8,21 @@
 @index("eXceed Vote")(css){
     <!-- content -->
     <script>
-
     function star(id) {
-    var str = id.split("-");
-    var j;
-    for(j = 1; j <= 5; j++){
-    document.getElementById(str[0]+"-"+j).style.color = "white";
-    }
-    var i;
-    for (i = 1; i <= parseInt(str[1]); i++) {
-    document.getElementById ( str[ 0 ] + "-" + i ).style.color = "#00CFFF" ;
-    }
-
+        var str = id.split("-");
+        var j;
+        for(j = 1; j <= 5; j++){
+            document.getElementById(str[0]+"-"+j).style.color = "white";
+        }
+        var i;
+        for (i = 1; i <= parseInt(str[1]); i++) {
+            document.getElementById ( str[ 0 ] + "-" + i ).style.color = "#00CFFF" ;
+        }
         document.getElementById("value-"+str[0]).value = str[1];
-
-
-
     }
 
 
     function post(){
-    //console.log(1+1);
     var i=0;
     var text="";
     text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
@@ -36,38 +32,26 @@
     text += ",\""+"@criteria.ID"+"\""+": "+ "\""+value_i+"\"";
 
     }
-    console.log(text);
-
     var obj =jQuery.parseJSON('{'+text+'}');
     $.post( "/rate_receive" , obj , function( data ){});
-    console.log(obj);
     window.location.replace ( "@routes.Application.main()" );
     }
 
     function post_vote(category){
-    //console.log(1+1);
-
-    var i=category+"";
-    var text="";
-    text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
-
-    console.log(category);
-
+        alert("You have voted this project for category : "+category);
+        var i=category+"";
+        var text="";
+        text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
         text += ",\""+"category"+"\""+": "+ "\""+i+"\"";
-
-
-
-
-    var obj =jQuery.parseJSON('{'+text+'}');
-    $.post( "/vote_receive" , obj , function( data ){});
-    console.log(obj);
-    //window.location.replace ( "@routes.Application.main()" );
+        var obj =jQuery.parseJSON('{'+text+'}');
+        $.post( "/vote_receive" , obj , function( data ){});
+        document.getElementById(category).style.color="rgb(242, 17, 43)";
     }
 
 
     </script>
     <!-- <div class="uk-width-1-1" style="padding-top: 10%; background: url(@routes.Assets.at("images/cover-header.jpg"));"> -->
-    <div class="uk-vertical-align-middle uk-text-center uk-width-1-1" style="padding-bottom:25px; background-size:100%">
+    <div class="uk-vertical-align-middle uk-text-center uk-width-1-1" style="padding-bottom:25px;padding-top:3% ;background-size:100%">
         <div class="uk-width-1-1-2" id="slide" >
             <div class="uk-slidenav-position" style="height: 100%; width:100%;" data-uk-slideshow="{animation: 'swipe'}" >
                 <ul class="uk-slideshow">
@@ -122,7 +106,8 @@
                 <div style="color:#00CFFF;"><b>Vote</b></div>
             }
             @listcategory.map{ category=>
-                <a id="@category.categories_name"onclick="post_vote(this.id)">@category.categories_name</a>
+                <a id="@category.categories_name" onclick="post_vote(this.id)">@category.categories_name</a>
+                <span id="@category.categories_name-check" style="position: absolute;"></span>
                 <br>
             }
         </div>
@@ -151,4 +136,19 @@
         </form>
         <br>
     </div>
+
+    <script>
+        @if( currentRate.size != 0){
+            @listcriteria.map{ criteria =>
+                star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+            }
+        }
+        @if( currentVote.size != 0 ){
+            @currentVote.map{ current =>
+                document.getElementById("@listcategory.get(current-1).categories_name").style.color="rgb(242, 17, 43)";
+                document.getElementById("@listcategory.get(current-1).categories_name-check").className="uk-icon-check";
+            }
+        }
+    </script>
 }(account)
+
