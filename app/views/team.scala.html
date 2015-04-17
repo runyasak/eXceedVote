@@ -8,20 +8,16 @@
     <script>
 
     function star(id) {
-    var str = id.split("-");
-    var j;
-    for(j = 1; j <= 5; j++){
-    document.getElementById(str[0]+"-"+j).style.color = "white";
-    }
-    var i;
-    for (i = 1; i <= parseInt(str[1]); i++) {
-    document.getElementById ( str[ 0 ] + "-" + i ).style.color = "#00CFFF" ;
-    }
-
+        var str = id.split("-");
+        var j;
+        for(j = 1; j <= 5; j++){
+            document.getElementById(str[0]+"-"+j).style.color = "white";
+        }
+        var i;
+        for (i = 1; i <= parseInt(str[1]); i++) {
+            document.getElementById ( str[ 0 ] + "-" + i ).style.color = "#00CFFF" ;
+        }
         document.getElementById("value-"+str[0]).value = str[1];
-
-
-
     }
 
 
@@ -45,23 +41,13 @@
     }
 
     function post_vote(category){
-    //console.log(1+1);
-
-    var i=category+"";
-    var text="";
-    text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
-
-    console.log(category);
-
+        alert("You have voted this project for category : "+category);
+        var i=category+"";
+        var text="";
+        text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
         text += ",\""+"category"+"\""+": "+ "\""+i+"\"";
-
-
-
-
-    var obj =jQuery.parseJSON('{'+text+'}');
-    $.post( "/vote_receive" , obj , function( data ){});
-    console.log(obj);
-    //window.location.replace ( "@routes.Application.main()" );
+        var obj =jQuery.parseJSON('{'+text+'}');
+        $.post( "/vote_receive" , obj , function( data ){});
     }
 
 
