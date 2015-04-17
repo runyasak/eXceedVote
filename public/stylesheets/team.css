@@ -1,24 +1,76 @@
-#blueText{
+.blueText{
 	color: #00CFFF;
 }
 
-#whiteText{
+.whiteText{
 	color: white;
+
 }
-
-
+#projectName{
+	font-size: 2.5em;
+	color: #00CFFF;
+}
+#projectDescription{
+	font-size: 0.87em;
+	text-align: left;
+	border-bottom: 4px solid #00ccff;
+}
+#teamname{
+	display: inline-block;
+}
 #navtop{
 	background-color: black;
+}
+
+#DescriptionHeading{
+
+	color:#00cfff;
+	font-size: 1.8em;
+	text-align: center;
+	font-weight: bold;
+
 }
 
 #slide{
 	max-width: 600px;
 	max-height: 400px;
-	width: 60%;
+	width: 100%;
 	height: 30%;
 	margin: auto;
+
+}
+body {
+    margin: 0;
+    padding: 0;
 }
 
+#star{
+ 
+ }
+#projectanddescription{
+
+	width: 100%;
+	max-width: 600px;
+	
+}
+#form-s-t{
+
+	max-width: 600px;
+	height: 10%; 
+	min-width: 90%;
+	
+}
 .uk-icon-star{
-	font-size: 28px;
+	font-size: 0.7em;
+}
+
+.col{
+
+	float: left;
+    width: 40%;
+    vertical-align: center;
+}
+.smallcol{
+	float: left;
+    width: 30%;
 }

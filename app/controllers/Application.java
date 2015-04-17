@@ -8,6 +8,10 @@ import static play.data.Form.*;
 import views.html.*;
 import models.*;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result main() {
@@ -22,9 +26,8 @@ public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result team(Long id){
         Team temp_team = Team.findTeamID(id);
-
-
-        return ok(team.render(temp_team,Rate_Criteria.find.all(),Vote_Categories.find.all(),Account.findAccountTeam(id)));
+        int accountID = Account.findAccount(session().get("username")).ID.intValue();
+        return ok(team.render(temp_team, Rate_Criteria.find.all(), Vote_Categories.find.all(), Account.findAccountTeam(id), Team.getCurrentRate(id.intValue(),accountID), Team.getCurrentVote(id.intValue(),accountID) ));
     }
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
@@ -36,6 +39,10 @@ public class Application extends Controller {
     		
     		session().clear();
     		session("username",loginForm.get().username);
+
+
+            Date d1 = new Date();
+            LogController.saveLog(loginForm.get().username,d1);
             System.out.println(session().get("username"));
     		return redirect(routes.Application.main());	
     			
@@ -44,11 +51,7 @@ public class Application extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result result(){
-        return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all()));
-    }
-     @Security.Authenticated(Secured.class)
-    public static Result voteResult(){
-        return ok(voteResult.render());
+        return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
     }
     @Security.Authenticated(Secured.class)
     public static Result vote(){

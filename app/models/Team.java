@@ -31,9 +31,7 @@ public class Team extends Model {
     public static Finder<Long,Team> find = new Finder<Long,Team>(Long.class,Team.class);
 
     public static Team findTeam(String team){
-
         return Team.find.where().eq("team_name", team).findUnique();
-
     }
     public static Team findTeamID(Long id){
 
@@ -101,6 +99,70 @@ public class Team extends Model {
             }
         }
         return rank;
+    }
+
+    public static List<String> getVote(){
+        int topicSize = Vote_Categories.find.all().size();
+        int teamSize = Team.find.all().size();
+        List<Vote> vote = new ArrayList<Vote>();
+        int[][] teamCount = new int[topicSize][Team.find.all().size()];
+        vote = Vote.find.all();
+        for( int i = 0; i < topicSize; i++ ) {
+            for( Vote v : vote ) {
+                if( v.vote_rec.categories.ID == i+1 ) {
+                    teamCount[i][v.teams.ID.intValue()-1]++;
+                }
+            }
+        }
+        int max = 0, team = 0;
+        List<String> voteResult = new ArrayList<String>();
+        for( int topicIndex = 0; topicIndex < topicSize; topicIndex++ ){
+            max = 0;
+            team = 0;
+            for( int teamIndex = 0; teamIndex < teamSize; teamIndex++ ) {
+                if( max < teamCount[topicIndex][teamIndex] ) {
+                    max = teamCount[topicIndex][teamIndex];
+                    team = teamIndex+1;
+                }
+            }
+            if( team == 0 ) {
+                voteResult.add("Unknown");
+            }
+            else {
+                voteResult.add(Team.find.where().eq("ID", team).findUnique().team_name);
+            }
+        }
+        return voteResult;
+    }
+
+    public static List<Integer> getCurrentRate(int teamID, int accountID){
+        int topicSize = Rate_Criteria.find.all().size();
+        int teamSize = Team.find.all().size();
+        List<Integer> currentRate = new ArrayList<Integer>();
+        for( int i = 0; i < topicSize; i++ ) {
+            List<Rate_Records> rateRec = new ArrayList<Rate_Records>();
+            for( Rate r : Rate.find.all() ){
+                if( r.users.ID == accountID && r.teams.ID == teamID ) {
+                    rateRec.add( r.rate_rec );
+                }
+            }
+            for( Rate_Records record : rateRec ){
+                currentRate.add(record.score);
+            }
+        }
+        return currentRate;
+    }
+
+    public static List<Integer> getCurrentVote(int teamID, int accountID){
+        int topicSize = Rate_Criteria.find.all().size();
+        int teamSize = Team.find.all().size();
+        List<Integer> currentVote = new ArrayList<Integer>();
+        for( Vote v : Vote.find.all() ){
+            if( v.users.ID == accountID && v.teams.ID == teamID) {
+                currentVote.add( v.vote_rec.categories.ID.intValue() );
+            }
+        }
+        return currentVote;
     }
 
 }

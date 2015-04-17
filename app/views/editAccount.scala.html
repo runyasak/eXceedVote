@@ -6,12 +6,23 @@
 
 
     <div style="padding-top:12%">
-        <h1 class="uk-text-center">Choose your Team</h1>
+        <h1 class="uk-text-center" style="color:#00CFFF;">Choose your Team</h1>
         <div class="uk-vertical-align uk-text-center uk-height-1-2">
             <div class="uk-vertical-align-middle" style="width: 250px;">
                 <form  class="uk-panel uk-panel-box uk-form" method="POST" action="/editaccount">
                     <div class="uk-form-row">
                         <!-- <input class="uk-width-1-1 uk-form-large" type="text" name="team_name" placeholder="Team Name"> -->
+                        <div class="uk-form-row">
+                            <input class="uk-width-1-1 uk-form-large" type="text" name="name" placeholder="Your Name">
+                        </div>
+
+                        <div class="uk-form-row">
+                            <input class="uk-width-1-1 uk-form-large" type="text" name="lastname" placeholder="Your LastName">
+                        </div>
+
+                        <div class="uk-form-row">
+                            <input class="uk-width-1-1 uk-form-large" type="text" name="studentID" placeholder="Your StudentID">
+                        </div>
 
                         <select class ="uk-width-1-1 uk-form-large" name="team_name">
                         	<option>--Choose your Team--</option>

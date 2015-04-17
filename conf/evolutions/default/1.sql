@@ -8,8 +8,18 @@ create table account (
   username                  varchar(255),
   password                  varchar(255),
   type                      integer,
+  name                      varchar(255),
+  lastname                  varchar(255),
+  student_id                varchar(255),
   teams_id                  bigint,
   constraint pk_account primary key (id))
+;
+
+create table log (
+  id                        bigint auto_increment not null,
+  username                  varchar(255),
+  date                      datetime,
+  constraint pk_log primary key (id))
 ;
 
 create table rate (
@@ -87,6 +97,8 @@ create index ix_vote_records_categories_9 on vote_records (categories_id);
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table account;
+
+drop table log;
 
 drop table rate;
 
