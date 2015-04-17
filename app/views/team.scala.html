@@ -1,9 +1,11 @@
-@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(currentRate:List[Integer])(currentVote:List[Integer])
+
+@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(currentRate:List[Integer])(currentVote:List[Integer])(account:Account)
+
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">
     <script src="@routes.Assets.at("ckeditor/ckeditor.js")"></script>
 }
-@index("eXceed Vote")(css) {
+@index("eXceed Vote")(css){
     <!-- content -->
     <script>
     function star(id) {
@@ -49,12 +51,12 @@
 
     </script>
     <!-- <div class="uk-width-1-1" style="padding-top: 10%; background: url(@routes.Assets.at("images/cover-header.jpg"));"> -->
-    <div class="uk-vertical-align-middle uk-text-center uk-width-1-1" style="padding-bottom:25px; background-size:100%">
-        <div class="uk-width-1-1-2" id="slide">
+    <div class="uk-vertical-align-middle uk-text-center uk-width-1-1" style="padding-bottom:25px;padding-top:3% ;background-size:100%">
+        <div class="uk-width-1-1-2" id="slide" >
             <div class="uk-slidenav-position" style="height: 100%; width:100%;" data-uk-slideshow="{animation: 'swipe'}" >
                 <ul class="uk-slideshow">
-                    <li><img src="@routes.Assets.at("images/test1.jpg")"></img></li>
-                    <li><img src="@routes.Assets.at("images/test2.jpg")"></img></li>
+                    <li><img src="/assets/images/Team@team.team_name/2.jpg"></img></li>
+                    <li><img src="/assets/images/Team@team.team_name/3.jpg"></img></li>
                 </ul>
                 <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-previous" data-uk-slideshow-item="previous" style="color: rgba( 255,255,255,0.4)"></a>
                 <a href="#" class="uk-slidenav uk-slidenav-contrast uk-slidenav-next" data-uk-slideshow-item="next" style="color: rgba(255,255,255,0.4);" ></a>
@@ -66,7 +68,7 @@
     <div id = "projectanddescription" class="uk-container-center uk-text-center">
         <div class="uk-text-large whiteText"> 
         <b id="projectName">@team.project_name</b>
-        <br>
+        <br><br>
         <b id="teamName">by @team.team_name</b> 
         <h2 id="DescriptionHeading">Description</h2>
         @Html(team.description)
@@ -104,7 +106,8 @@
                 <div style="color:#00CFFF;"><b>Vote</b></div>
             }
             @listcategory.map{ category=>
-                <a id="@category.categories_name"onclick="post_vote(this.id)">@category.categories_name</a>
+                <a id="@category.categories_name" onclick="post_vote(this.id)">@category.categories_name</a>
+                <span id="@category.categories_name-check" style="position: absolute;"></span>
                 <br>
             }
         </div>
@@ -133,12 +136,19 @@
         </form>
         <br>
     </div>
+
     <script>
-        @listcriteria.map{ criteria =>
-            star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+        @if( currentRate.size != 0){
+            @listcriteria.map{ criteria =>
+                star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+            }
         }
-        @currentVote.map{ current =>
-            document.getElementById("@listcategory.get(current-1).categories_name").style.color="rgb(242, 17, 43)";
+        @if( currentVote.size != 0 ){
+            @currentVote.map{ current =>
+                document.getElementById("@listcategory.get(current-1).categories_name").style.color="rgb(242, 17, 43)";
+                document.getElementById("@listcategory.get(current-1).categories_name-check").className="uk-icon-check";
+            }
         }
     </script>
-}
+}(account)
+
