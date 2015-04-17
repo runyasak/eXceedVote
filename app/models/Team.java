@@ -103,4 +103,20 @@ public class Team extends Model {
         return rank;
     }
 
+    public static MultiKeyMap getVote(){
+        int teamSize = Team.find.all().size();
+        int topicSize = Vote_Categories.find.all().size();
+        MultiKeyMap map = new MultiKeyMap();
+
+        for( int i=1; i <= teamSize; i++){
+            for( int j = 1; j <= topicSize; j++){
+                String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
+                String topicName = Vote_Categories.find.where().eq("ID", j).findUnique().categories_name;
+                int score = sumScore(i,j);
+                map.put(teamName, topicName, score);
+            }
+        }
+        return map;
+    }
+
 }
