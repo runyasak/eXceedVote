@@ -17,10 +17,10 @@ public class Application extends Controller {
     public static Result main() {
         int num_team=Team.find.all().size();
 
-        return ok(main.render(num_team,Team.find.all()) );
+        return ok(main.render(num_team,Team.find.all(),Account.findAccount(session().get("username"))) );
     }
     public static Result login(){
-    	return ok(login.render(Form.form(Login.class)));
+    	return ok(login.render(Form.form(Login.class),Account.findAccount(session().get("username"))));
     	
     }
     @Security.Authenticated(Secured.class)
@@ -28,14 +28,14 @@ public class Application extends Controller {
         Team temp_team = Team.findTeamID(id);
 
 
-        return ok(team.render(temp_team,Rate_Criteria.find.all(),Vote_Categories.find.all(),Account.findAccountTeam(id)));
+        return ok(team.render(temp_team,Rate_Criteria.find.all(),Vote_Categories.find.all(),Account.findAccountTeam(id),Account.findAccount(session().get("username"))));
     }
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
     	if(loginForm.hasErrors()){
-    		return badRequest(login.render(loginForm));
-    		
-    		
+    		return badRequest(login.render(loginForm,Account.findAccount(session().get("username"))));
+
+
     	}else{
     		
     		session().clear();
@@ -55,16 +55,16 @@ public class Application extends Controller {
     public static Result result(){
         return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
     }
-    @Security.Authenticated(Secured.class)
-    public static Result vote(){
-
-        return ok(vote.render(Rate_Criteria.find.all()));
-    }
-    @Security.Authenticated(Secured.class)
-    public static Result voteTeam(Long id){
-        Rate_Criteria temp_topic = Rate_Criteria.findTopicID(id);
-        return ok(voteTeam.render(Team.find.all(),temp_topic));
-    }
+//    @Security.Authenticated(Secured.class)
+//    public static Result vote(){
+//
+//        return ok(vote.render(Rate_Criteria.find.all()));
+//    }
+//    @Security.Authenticated(Secured.class)
+//    public static Result voteTeam(Long id){
+//        Rate_Criteria temp_topic = Rate_Criteria.findTopicID(id);
+//        return ok(voteTeam.render(Team.find.all(),temp_topic));
+//    }
     @Security.Authenticated(Secured.class)
     public static Result addTeam(){
         
@@ -91,12 +91,12 @@ public class Application extends Controller {
     public static Result editAccount(){
         int num_team=Team.find.all().size();
 
-        return ok(editAccount.render(num_team,Team.find.all()) );
+        return ok(editAccount.render(num_team,Team.find.all(),Account.findAccount(session().get("username"))) );
     }
     public static Result editTeam(Long id){
         Team editTeam =Team.findTeamID(id);
         System.out.println("");
-        return ok(editteam.render(editTeam));
+        return ok(editteam.render(editTeam,Account.findAccount(session().get("username"))));
     }
     
     public static class Login{
