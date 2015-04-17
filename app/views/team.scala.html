@@ -95,6 +95,9 @@
         <div class="uk-text-large whiteText" >
             <!-- <b>Rate</b><br> -->
             <div id="rating">
+             @if(listcriteria.size!=0){
+                 <div style="color:#00CFFF"><b>Rate</b></div>
+            }
                  @listcriteria.map{ criteria =>
                    <!-- separate this div into three smaller columns -->
                    <div class="smallcol">
@@ -109,23 +112,27 @@
                     </div>
 
                     <div class = "smallcol">
-                    <a id="@criteria.criteria_name-0" style="color: #00CFFF" onclick="star(this.id)" >no vote</a>
+                    <a id="@criteria.criteria_name-0" style="color: #00CFFF" onclick="star(this.id)" >no Rate</a>
                     </div>
                     <br>
                 }
             </div>
             <!-- <b>Vote</b><br> -->
+            @if(listcategory.size!=0){
+                <div style="color:#00CFFF;"><b>Vote</b></div>
+            }
             @listcategory.map{ category=>
                 <a id="@category.categories_name"onclick="post_vote(this.id)">@category.categories_name</a>
                 <br>
             }
         </div>
         <br>
-
+        <a class="uk-button uk-button-primary uk-button-danger" href="/editteam/@team.ID">Edit Team</a>
         <button class="uk-button uk-button-primary" type="submit" id="submitBtn" onclick="post()"> Submit </button>
+
         <div class="uk-text-large uk-margin-bottom uk-margin-top whiteText">
              @if(listAccount.size!=0){
-                <div><b>Members</b></div>
+                <div style="color:#00CFFF;"><b>Members</b></div>
             }
                 @listAccount.map{ account=>
                     <div>@account.username</div>
