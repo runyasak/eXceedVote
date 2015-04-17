@@ -33,13 +33,13 @@ public class RateController extends Controller{
         rate_rec.score=score;
         rate_rec.criteria=newTopic;
 
-       newRate.teams=newTeam;
+        newRate.teams=newTeam;
         newRate.users=newAccount;
         newRate.rate_rec=rate_rec;
 
         newTeam.rates.add(newRate);
         newAccount.rates.add(newRate);
-       newTopic.rate_rec.add(rate_rec);
+        newTopic.rate_rec.add(rate_rec);
 
 
 
@@ -85,6 +85,7 @@ public class RateController extends Controller{
 
         return ok(testresult2.render(resultRate()));
     }
+
 
 
 }

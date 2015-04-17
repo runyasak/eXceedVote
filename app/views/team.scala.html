@@ -102,8 +102,9 @@
         <br>
         <button class="uk-button" type="submit" id="submitBtn" onclick="post()"> Submit </button>
         <div class="uk-text-large uk-margin-bottom uk-margin-top" id="whiteText">
-                1.) gu saint 123<br>
-                1.) gu saint 123<br>1.) gu saint 123<br>1.) gu saint 123<br>
+                @if(listAccount.size!=0){
+                    <div><b>Members</b></div>
+                }
                 @listAccount.map{ account=>
                     <div>@account.username</div>
 
