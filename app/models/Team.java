@@ -103,20 +103,30 @@ public class Team extends Model {
         return rank;
     }
 
-    public static MultiKeyMap getVote(){
-        int teamSize = Team.find.all().size();
+    public static List<Integer> getVote(){
         int topicSize = Vote_Categories.find.all().size();
-        MultiKeyMap map = new MultiKeyMap();
-
-        for( int i=1; i <= teamSize; i++){
-            for( int j = 1; j <= topicSize; j++){
-                String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
-                String topicName = Vote_Categories.find.where().eq("ID", j).findUnique().categories_name;
-                int score = sumScore(i,j);
-                map.put(teamName, topicName, score);
+        List<Vote> vote = new ArrayList<Vote>();
+        int[][] teamCount = new int[topicSize][Team.find.all().size()];
+        vote = Vote.find.all();
+        for( int i = 1; i < topicSize; i++ ) {
+            for( Vote v : vote ) {
+                if( v.vote_rec.categories.ID == i ) {
+                    teamCount[i][v.teams.ID.intValue()-1]++;
+                }
             }
         }
-        return map;
+        int max = 0, team = 0;
+        List<Integer> voteResult = new ArrayList<Integer>();
+        for( int topicIndex = 0; topicIndex < teamCount.length; topicIndex++ ){
+            for( int teamIndex = 0; teamIndex < teamCount[0].length; teamIndex++ ) {
+                if( max < teamCount[topicIndex][teamIndex] ) {
+                    max = teamCount[topicIndex][teamIndex];
+                    team = teamIndex+1;
+                }
+            }
+            voteResult.add(team);
+        }
+        return voteResult;
     }
 
 }

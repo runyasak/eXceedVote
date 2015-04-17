@@ -45,7 +45,7 @@ public class Application extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result result(){
-        return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all()));
+        return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
     }
     @Security.Authenticated(Secured.class)
     public static Result vote(){
