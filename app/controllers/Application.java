@@ -117,4 +117,8 @@ public class Application extends Controller {
             routes.Application.login()
         );
     }
+
+    public static Result uploadImage(){
+        return ok(uploadImage.render());
+    }
 }
