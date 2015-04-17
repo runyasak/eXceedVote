@@ -81,6 +81,18 @@ public class Application extends Controller {
 
         return ok(newcategory.render());
     }
+
+    @Security.Authenticated(Secured.class)
+    public static Result editAccount(){
+        int num_team=Team.find.all().size();
+
+        return ok(editAccount.render(num_team,Team.find.all()) );
+    }
+    public static Result editTeam(Long id){
+        Team editTeam =Team.findTeamID(id);
+        System.out.println("");
+        return ok(editteam.render(editTeam));
+    }
     
     public static class Login{
     	public String username;

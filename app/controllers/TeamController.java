@@ -32,6 +32,20 @@ public class TeamController extends Controller {
         return main();
 
     }
+    public static Result getEditTeam(Long id){
+        Form<Team> newTeamForm = Form.form(Team.class).bindFromRequest();
+        editTeam(id,newTeamForm.get().team_name,newTeamForm.get().project_name,newTeamForm.get().description);
+
+        return main();
+    }
+    public static void editTeam(Long id,String team_name,String project_name,String description){
+        Team editteam = Team.findTeamID(id);
+        editteam.team_name =team_name;
+        editteam.project_name=project_name;
+        editteam.description=description;
+        editteam.save();
+
+    }
 
 
 }
