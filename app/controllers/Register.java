@@ -35,8 +35,10 @@ public class Register extends Controller {
     }
 
     public static Result getEditTeam (){
-        
-
+        Form<Team> newAccountForm = Form.form(Team.class).bindFromRequest();
+        //System.out.println(session().get("username"));
+        //System.out.println(newAccountForm.get().team_name);
+        editTeam(session().get("username"),newAccountForm.get().team_name);
         return main();
 
     }
