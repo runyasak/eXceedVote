@@ -153,4 +153,16 @@ public class Team extends Model {
         return currentRate;
     }
 
+    public static List<Integer> getCurrentVote(int teamID, int accountID){
+        int topicSize = Rate_Criteria.find.all().size();
+        int teamSize = Team.find.all().size();
+        List<Integer> currentVote = new ArrayList<Integer>();
+        for( Vote v : Vote.find.all() ){
+            if( v.users.ID == accountID && v.teams.ID == teamID) {
+                currentVote.add( v.vote_rec.categories.ID.intValue() );
+            }
+        }
+        return currentVote;
+    }
+
 }

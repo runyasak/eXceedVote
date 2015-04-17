@@ -1,4 +1,4 @@
-@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(currentRate:List[Integer])
+@(team:Team)(listcriteria:List[Rate_Criteria])(listcategory:List[Vote_Categories])(listAccount:List[Account])(currentRate:List[Integer])(currentVote:List[Integer])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">
     <script src="@routes.Assets.at("ckeditor/ckeditor.js")"></script>
@@ -43,6 +43,7 @@
         text += ",\""+"category"+"\""+": "+ "\""+i+"\"";
         var obj =jQuery.parseJSON('{'+text+'}');
         $.post( "/vote_receive" , obj , function( data ){});
+        document.getElementById(category).style.color="rgb(242, 17, 43)";
     }
 
 
@@ -135,6 +136,9 @@
     <script>
         @listcriteria.map{ criteria =>
             star( "@criteria.criteria_name-@currentRate.get(criteria.ID.toInt-1)" );
+        }
+        @currentVote.map{ current =>
+            document.getElementById("@listcategory.get(current-1).categories_name").style.color="rgb(242, 17, 43)";
         }
     </script>
 }

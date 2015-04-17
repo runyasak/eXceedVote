@@ -27,7 +27,7 @@ public class Application extends Controller {
     public static Result team(Long id){
         Team temp_team = Team.findTeamID(id);
         int accountID = Account.findAccount(session().get("username")).ID.intValue();
-        return ok(team.render(temp_team, Rate_Criteria.find.all(), Vote_Categories.find.all(), Account.findAccountTeam(id), Team.getCurrentRate(id.intValue(),accountID) ));
+        return ok(team.render(temp_team, Rate_Criteria.find.all(), Vote_Categories.find.all(), Account.findAccountTeam(id), Team.getCurrentRate(id.intValue(),accountID), Team.getCurrentVote(id.intValue(),accountID) ));
     }
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
