@@ -2,7 +2,7 @@ package controllers;
 
 import models.*;
 import models.Team;
-import models.Topic;
+import models.Rate_Criteria;
 import models.Vote;
 import play.data.Form;
 import play.mvc.Controller;
@@ -22,28 +22,28 @@ public class RateController extends Controller{
     public static Result saveRate(Long teams_id,int score ,Long topic_id){
         Rate newRate =new Rate();
 
-        Topic newTopic=Topic.findTopicID(topic_id);
+        Rate_Criteria newTopic=Rate_Criteria.findTopicID(topic_id);
         Account newAccount=Account.findAccount(session().get("username"));
 
         Team newTeam = Team.findTeamID(teams_id);
 
-        Rate_Categories rate_cate =new Rate_Categories();
-        rate_cate.rates.add(newRate);
+        Rate_Records rate_rec =new Rate_Records();
+        rate_rec.rates.add(newRate);
 
-        rate_cate.score=score;
-        rate_cate.topics=newTopic;
+        rate_rec.score=score;
+        rate_rec.criteria=newTopic;
 
        newRate.teams=newTeam;
         newRate.users=newAccount;
-        newRate.rate_cate=rate_cate;
+        newRate.rate_rec=rate_rec;
 
         newTeam.rates.add(newRate);
         newAccount.rates.add(newRate);
-       newTopic.rate_cate.add(rate_cate);
+       newTopic.rate_rec.add(rate_rec);
 
 
 
-        rate_cate.save();
+        rate_rec.save();
         newRate.save();
 
         return ok();

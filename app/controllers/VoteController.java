@@ -6,7 +6,7 @@ import com.avaje.ebean.RawSql;
 import com.avaje.ebean.RawSqlBuilder;
 import models.*;
 import models.Team;
-import models.Topic;
+import models.Rate_Criteria;
 import models.Vote;
 import play.data.Form;
 import play.mvc.Controller;
@@ -25,28 +25,28 @@ public class VoteController extends Controller{
     public static Result saveVote(Long teams_id,Long topic_id){
         Vote newVote =new Vote();
 
-        Topic newTopic=Topic.findTopicID(topic_id);
+        Vote_Categories newTopic=Vote_Categories.findTopicID(topic_id);
         Account newAccount=Account.findAccount(session().get("username"));
 
         Team newTeam = Team.findTeamID(teams_id);
 
-        Vote_Categories vote_cate =new Vote_Categories();
-        vote_cate.votes.add(newVote);
+        Vote_Records vote_rec =new Vote_Records();
+        vote_rec.votes.add(newVote);
 
 
-        vote_cate.topics=newTopic;
+        vote_rec.categories=newTopic;
 
         newVote.teams=newTeam;
         newVote.users=newAccount;
-        newVote.vote_cate=vote_cate;
+        newVote.vote_rec=vote_rec;
 
         newTeam.votes.add(newVote);
         newAccount.votes.add(newVote);
-        newTopic.vote_cate.add(vote_cate);
+        newTopic.vote_rec.add(vote_rec);
 
 
 
-        vote_cate.save();
+        vote_rec.save();
         newVote.save();
 
         return ok();

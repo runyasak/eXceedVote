@@ -1,4 +1,4 @@
-@(listteam:List[Team])(topic:Topic)
+@(listteam:List[Team])(topic:Rate_Criteria)
     @css = {
     <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainVote.css")">
 }
@@ -32,7 +32,7 @@
 
  </script>
 
-<div class="uk-text-center uk-heading-large" style="color: #00CFFF">@topic.topic_name</div>
+<div class="uk-text-center uk-heading-large" style="color: #00CFFF">@topic.criteria_name</div>
 <div class="uk-text-center uk-heading-large" style="color: #00CFFF">Choose Team</div>
 <div class ="uk-container uk-container-center uk-margin-top uk-margin-bottom">
 

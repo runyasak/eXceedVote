@@ -1,4 +1,4 @@
-@(team:Team)(listtopic:List[Topic])
+@(team:Team)(listcriteria:List[Rate_Criteria])
 @css = {
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/team.css")">    
 }
@@ -29,10 +29,10 @@
     var i=0;
     var text="";
     text+= "\""+"teams_id"+"\""+": "+ "\""+@team.ID+"\"";
-   @listtopic.map{ topic=>
+   @listcriteria.map{ criteria=>
 
-    var value_i = document.getElementById("value-@topic.topic_name").value;
-    text += ",\""+"@topic.ID"+"\""+": "+ "\""+value_i+"\"";
+    var value_i = document.getElementById("value-@criteria.criteria_name").value;
+    text += ",\""+"@criteria.ID"+"\""+": "+ "\""+value_i+"\"";
 
     }
     console.log(text);
@@ -61,13 +61,14 @@
     <div class="uk-container-center uk-text-center">
         <div class="uk-text-large" id="whiteText">  <b>@team.team_name</b> <br> Description : @team.description </div>
         <div class="uk-text-large" id="whiteText">
-            <br>
-            @listtopic.map{ topic =>
-               <span id="blueText"> @topic.topic_name: </span>
-               <input type="hidden" id="value-@topic.topic_name" value="0"></input>
+
+             @listcriteria.map{ criteria =>
+               <span id="blueText"> @criteria.criteria_name: </span>
+               <input type="hidden" id="value-@criteria.criteria_name" value="0"></input>
+
                     @for(i <- 1 to 5){
-                        <a class="uk-icon-star" id="@topic.topic_name-@i" style="color:white" onclick="star(this.id)"></a>
-                    } <a id="@topic.topic_name-0" style="color: #00CFFF" onclick="star(this.id)" >no vote</a>
+                        <a class="uk-icon-star" id="@criteria.criteria_name-@i" style="color:white" onclick="star(this.id)"></a>
+                    } <a id="@criteria.criteria_name-0" style="color: #00CFFF" onclick="star(this.id)" >no vote</a>
             <br>
             }
         </div>

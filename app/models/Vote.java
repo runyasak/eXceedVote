@@ -16,7 +16,7 @@ public class Vote extends Model {
     @ManyToOne
     public Team teams;
     @ManyToOne
-    public Vote_Categories vote_cate;
+    public Vote_Records vote_rec;
 
     public static Finder<Long,Vote> find=new Finder<Long,Vote>(Long.class,Vote.class);
 
