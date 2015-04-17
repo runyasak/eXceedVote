@@ -8,6 +8,9 @@ create table account (
   username                  varchar(255),
   password                  varchar(255),
   type                      integer,
+  name                      varchar(255),
+  lastname                  varchar(255),
+  student_id                varchar(255),
   teams_id                  bigint,
   constraint pk_account primary key (id))
 ;
