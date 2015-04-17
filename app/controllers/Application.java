@@ -40,7 +40,6 @@ public class Application extends Controller {
     		return redirect(routes.Application.main());	
     			
     	}
-        
     	
     }
     @Security.Authenticated(Secured.class)
