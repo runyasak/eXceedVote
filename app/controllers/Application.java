@@ -8,6 +8,10 @@ import static play.data.Form.*;
 import views.html.*;
 import models.*;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result main() {
@@ -36,6 +40,10 @@ public class Application extends Controller {
     		
     		session().clear();
     		session("username",loginForm.get().username);
+
+
+            Date d1 = new Date();
+            LogController.saveLog(loginForm.get().username,d1);
             System.out.println(session().get("username"));
     		return redirect(routes.Application.main());	
     			

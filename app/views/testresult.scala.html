@@ -8,8 +8,8 @@
     <div>VOTE</div>
         @result.map{ res =>
 
-            <div>team_id : @res.teams.team_name</div>
-            <div>users_id : @res.users.username</div>
+            <div>team : @res.teams.team_name</div>
+            <div>users : @res.users.username</div>
             <div>vote_cate :@res.vote_rec.categories.categories_name</div>
             <div>----------------------------------</div>
         }
