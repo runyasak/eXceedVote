@@ -40,6 +40,52 @@ section, footer{
 	display: block;
 }
 
+#days_div{
+	text-align: center;
+	padding: 60px 0 0 75px;
+	font-family: "Arial" !important;
+	/*font-weight: bold;*/
+	font-size: 50%;
+	position: absolute;
+	letter-spacing: 0px;
+	color: #fff;
+
+}
+#hours_div{
+	text-align: center;
+	padding: 60px 0 0 169px;
+	font-family: "Arial";
+	/*font-weight: bold;*/
+	font-size: 50%;
+	position: absolute;
+	letter-spacing: 0px;
+	color: #fff;
+
+}
+
+#mins_div {
+	text-align: center;
+	padding: 60px 0 0 263px;
+	font-family: "Arial";
+	/*font-weight: bold;*/
+	font-size: 50%;
+	position: absolute;
+	letter-spacing: 0px;
+	color: #fff;
+
+}
+
+#secs_div {
+	text-align: center;
+	padding: 60px 0 0 363px;
+	font-family: "Arial" !important;
+	/* font-weight: bold; */
+	font-size: 50%;
+	position: absolute;
+	letter-spacing: 0px;
+	color: #fff;
+}
+
 
 /*----------------------------
 	Main Section

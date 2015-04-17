@@ -39,6 +39,7 @@ public class VoteController extends Controller{
         newTeam.votes.add(newVote);
         newAccount.votes.add(newVote);
         newTopic.vote_rec.add(vote_rec);
+        
         vote_rec.save();
         newVote.save();
 
@@ -57,7 +58,6 @@ public class VoteController extends Controller{
 
     public static Result receiveVote(){
         if (request().method().equals("POST")) {
-            //System.out.println("good");
             Map<String, String[]> map = request().body().asFormUrlEncoded();
             Long teams_id= Long.parseLong(map.get("teams_id")[0]);
 

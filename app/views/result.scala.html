@@ -9,7 +9,7 @@
       </div>
 </div>
 <div class="uk-grid ">
-<div class="uk-align-center" data-uk-grid-margin="" id = "tabs">
+      <div class="uk-align-center" data-uk-grid-margin="" id = "tabs">
             <b>Rate Result</b><br>
             <ul class="uk-tab" data-uk-tab="{connect:'#tab-content'}">
                   @listcriteria.map{ criteria=>
@@ -28,23 +28,23 @@
                         <li class="data-uk-switcher-item="@i"">
                               <div>
                                     <table class="uk-table">
-                                    <thead> 
-                                          <tr>
-                                                <th>Team Names</th>
-                                                <th>Scores</th>
-                                                <th>Rank</th>
-                                          </tr>
-                                    </thead>
-                                    <tbody>
-                                          @listteam.map{ team=>
+                                          <thead> 
                                                 <tr>
-                                                      <td>@team.team_name</td>
-                                                      <td>@result.get(team.team_name, listcriteria.get(i-1).criteria_name)</td>
-                                                      <td>@rank.get(team.team_name, listcriteria.get(i-1).criteria_name)</td>
+                                                      <th>Team Names</th>
+                                                      <th>Scores</th>
+                                                      <th>Rank</th>
                                                 </tr>
-                                          }
-                                    </tbody>
-                              </table>
+                                          </thead>
+                                          <tbody>
+                                                @listteam.map{ team=>
+                                                      <tr>
+                                                            <td>@team.team_name</td>
+                                                            <td>@result.get(team.team_name, listcriteria.get(i-1).criteria_name)</td>
+                                                            <td>@rank.get(team.team_name, listcriteria.get(i-1).criteria_name)</td>
+                                                      </tr>
+                                                }
+                                          </tbody>
+                                    </table>
                               </div>
                         </li>
                   }
@@ -59,7 +59,8 @@
                         </div>
                   }
 
-</div>
-</div>
+            </div>
+      </div>
 
+</div>
 }
