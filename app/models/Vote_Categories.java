@@ -21,7 +21,7 @@ public class Vote_Categories extends Model {
     public static Finder<Long,Vote_Categories> find=new Finder<Long,Vote_Categories>(Long.class,Vote_Categories.class);
     public static Vote_Categories findTopic(String topic){
 
-        return Vote_Categories.find.where().eq("topic_name", topic).findUnique();
+        return Vote_Categories.find.where().eq("categories_name", topic).findUnique();
 
     }
     public static Vote_Categories findTopicID(Long topic_id){

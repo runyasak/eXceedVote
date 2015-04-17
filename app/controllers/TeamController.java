@@ -16,18 +16,18 @@ public class TeamController extends Controller {
         return redirect(routes.Application.main());
     }
 
-    public static Result AddTeam(String Teamname,String description){
+    public static Result AddTeam(String Teamname,String description,String project_name){
         Team newTeam =new Team();
         newTeam.team_name=Teamname;
         newTeam.description=description;
-
+        newTeam.project_name=project_name;
         newTeam.save();
 
         return main();
     }
     public static Result getAddteam(){
         Form<Team> newTeamForm = Form.form(Team.class).bindFromRequest();
-        AddTeam(newTeamForm.get().team_name,newTeamForm.get().description);
+        AddTeam(newTeamForm.get().team_name,newTeamForm.get().description,newTeamForm.get().project_name);
         System.out.println(newTeamForm.get().team_name);
         return main();
 

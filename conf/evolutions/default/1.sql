@@ -36,6 +36,7 @@ create table rate_records (
 create table team (
   id                        bigint auto_increment not null,
   team_name                 varchar(255),
+  project_name              varchar(255),
   description               varchar(255),
   constraint pk_team primary key (id))
 ;

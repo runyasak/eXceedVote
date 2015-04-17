@@ -18,6 +18,7 @@ public class Team extends Model {
     @Id
     public Long ID;
     public String team_name;
+    public String project_name;
     public String description;
 
     @OneToMany(mappedBy = "teams")

@@ -27,7 +27,9 @@ public class Account extends Model {
     public static Finder<Long,Account> find=new Finder<Long,Account>(Long.class,Account.class);
 
     public void addRate(Rate rates){
+
         this.rates.add(rates);
+
 
 
     }
@@ -37,7 +39,7 @@ public class Account extends Model {
 
     }
 	public static Account authenticate(String username,String password){
-		
+
 		
 		
 		return Account.find.where().eq("username", username).eq("password" , password).findUnique();
@@ -46,6 +48,13 @@ public class Account extends Model {
     public static Account findAccount(String username){
 
         return Account.find.where().eq("username", username).findUnique();
+
+    }
+    public static List<Account> findAccountTeam(Long id){
+
+
+
+        return Account.find.where().eq("teams_id",id).findList();
 
     }
 
