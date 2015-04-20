@@ -42,11 +42,15 @@ background: #2F2D2D;
     	<li><a href="#my-id" class="uk-navbar-toggle" style="color: #00CFFF" data-uk-offcanvas></a></li>
         <li><a class="uk-text-large" style="color: #00CFFF" href="/"><b>eXceed</b> vote</a></li>
     </ul>
-    <div class="uk-navbar-flip">
-        <ul class="uk-navbar-nav">
-            <li><a class="uk-text-large" style="color: #00CFFF" href="/admin"><b>Admin</b></a></li>
-        </ul>
-    </div>
+    @if(account!=null) {
+        @if(account.`type` == 2) {
+            <div class="uk-navbar-flip">
+                <ul class="uk-navbar-nav">
+                    <li><a class="uk-text-large" style="color : #00CFFF" href="/admin"><b>Admin</b></a></li>
+                </ul>
+            </div>
+        }
+    }
 </nav>
     <div id="my-id" class="uk-offcanvas  uk-text-center " style="">
         <div class="uk-offcanvas-bar ">
