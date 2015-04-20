@@ -53,8 +53,17 @@ public class Application extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result result(){
-        return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
+        if(Account.findAccount(session().get("username")).type==2) {
+            return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
+        }
+        else{
+            return redirect(
+                    routes.Application.main()
+            );
+
+        }
     }
+
 //    @Security.Authenticated(Secured.class)
 //    public static Result vote(){
 //
@@ -67,31 +76,64 @@ public class Application extends Controller {
 //    }
     @Security.Authenticated(Secured.class)
     public static Result addTeam(){
-        
+        if(Account.findAccount(session().get("username")).type==2) {
 
-        return ok(newteam.render());
+
+            return ok(newteam.render());
+        }
+        else{
+            return redirect(
+                    routes.Application.main()
+            );
+
+        }
     }
 
     public static Result addAccount(){
         System.out.println();
-        return ok(newaccount.render());
+        if(Account.findAccount(session().get("username")).type==2) {
+            return ok(newaccount.render());
+        }
+        else{
+            return redirect(
+                    routes.Application.main()
+            );
+
+        }
     }
     @Security.Authenticated(Secured.class)
     public static Result addTopic(){
+        if(Account.findAccount(session().get("username")).type==2) {
+            return ok(newtopic.render());
+        }
+        else{
+            return redirect(
+                    routes.Application.main()
+            );
 
-        return ok(newtopic.render());
+        }
     }
     @Security.Authenticated(Secured.class)
     public static Result addCategory(){
+        if(Account.findAccount(session().get("username")).type==2) {
+            return ok(newcategory.render());
+        }
+        else{
+            return redirect(
+                    routes.Application.main()
+            );
 
-        return ok(newcategory.render());
+        }
     }
 
     @Security.Authenticated(Secured.class)
     public static Result editAccount(){
         int num_team=Team.find.all().size();
 
-        return ok(editAccount.render(num_team,Team.find.all(),Account.findAccount(session().get("username"))) );
+
+        return ok(editAccount.render(num_team, Team.find.all(), Account.findAccount(session().get("username"))));
+
+
     }
     public static Result editTeam(Long id){
         Team editTeam =Team.findTeamID(id);
