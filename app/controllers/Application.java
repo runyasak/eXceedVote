@@ -15,21 +15,52 @@ import java.util.GregorianCalendar;
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
     public static Result main() {
-        int num_team=Team.find.all().size();
+        if(Config.find.all().size()==0){
+            (new models.Config("main",true)).save();
+            (new models.Config("team",true)).save();
+            (new models.Config("edit_profile",true)).save();
+            Account.create("admin","teamsaint4",2);
 
-        return ok(main.render(num_team,Team.find.all(),Account.findAccount(session().get("username"))) );
+
+        }
+        if(Config.find.byId(Config.main).open) {
+            int num_team = Team.find.all().size();
+
+            return ok(main.render(num_team, Team.find.all(), Account.findAccount(session().get("username"))));
+        }
+        else{
+
+            return redirect(
+                    routes.Application.login()
+            );
+        }
     }
     public static Result login(){
+        if(Config.find.all().size()==0){
+            (new models.Config("main",true)).save();
+            (new models.Config("team",true)).save();
+            (new models.Config("edit_profile",true)).save();
+             Account.create("admin","teamsaint4",2);
+
+
+        }
     	return ok(login.render(Form.form(Login.class),Account.findAccount(session().get("username"))));
     	
     }
     @Security.Authenticated(Secured.class)
     public static Result team(Long id){
-        Team temp_team = Team.findTeamID(id);
+        if(Config.find.byId(Config.team).open) {
+            Team temp_team = Team.findTeamID(id);
 
-        int accountID = Account.findAccount(session().get("username")).ID.intValue();
-        return ok(team.render(temp_team, Rate_Criteria.find.all(), Vote_Categories.find.all(), Account.findAccountTeam(id), Team.getCurrentRate(id.intValue(),accountID), Team.getCurrentVote(id.intValue(),accountID),Account.findAccount(session().get("username")) ));
+            int accountID = Account.findAccount(session().get("username")).ID.intValue();
+            return ok(team.render(temp_team, Rate_Criteria.find.all(), Vote_Categories.find.all(), Account.findAccountTeam(id), Team.getCurrentRate(id.intValue(), accountID), Team.getCurrentVote(id.intValue(), accountID), Account.findAccount(session().get("username"))));
+        }
+        else{
 
+            return redirect(
+                    routes.Application.login()
+            );
+        }
     }
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
@@ -53,7 +84,7 @@ public class Application extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result result(){
-        if(Account.findAccount(session().get("username")).type==2) {
+        if(Account.findAccount(session().get("username")).type==1 ||Account.findAccount(session().get("username")).type==2) {
             return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
         }
         else{
@@ -128,12 +159,19 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result editAccount(){
-        int num_team=Team.find.all().size();
+        if(Config.find.byId(Config.edit_profile).open) {
+            int num_team = Team.find.all().size();
 
 
-        return ok(editAccount.render(num_team, Team.find.all(), Account.findAccount(session().get("username"))));
+            return ok(editAccount.render(num_team, Team.find.all(), Account.findAccount(session().get("username"))));
 
+        }
+        else{
+            return redirect(
+                    routes.Application.login()
+            );
 
+        }
     }
     public static Result editTeam(Long id){
         Team editTeam =Team.findTeamID(id);

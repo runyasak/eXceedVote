@@ -15,6 +15,13 @@ create table account (
   constraint pk_account primary key (id))
 ;
 
+create table config (
+  id                        bigint auto_increment not null,
+  page_name                 varchar(255),
+  open                      tinyint(1) default 0,
+  constraint pk_config primary key (id))
+;
+
 create table log (
   id                        bigint auto_increment not null,
   username                  varchar(255),
@@ -97,6 +104,8 @@ create index ix_vote_records_categories_9 on vote_records (categories_id);
 SET FOREIGN_KEY_CHECKS=0;
 
 drop table account;
+
+drop table config;
 
 drop table log;
 
