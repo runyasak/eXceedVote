@@ -46,14 +46,14 @@ public class Application extends Controller {
             Date d1 = new Date();
             LogController.saveLog(loginForm.get().username,d1);
             System.out.println(session().get("username"));
-    		return redirect(routes.Application.main());	
+    		return redirect(routes.Application.result());	
     			
     	}
     	
     }
     @Security.Authenticated(Secured.class)
     public static Result result(){
-        if(Account.findAccount(session().get("username")).type==2) {
+        if(Account.findAccount(session().get("username")).type==2 || Account.findAccount(session().get("username")).type==1) {
             return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
         }
         else{
