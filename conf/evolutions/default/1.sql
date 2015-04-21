@@ -22,6 +22,12 @@ create table config (
   constraint pk_config primary key (id))
 ;
 
+create table images (
+  id                        bigint auto_increment not null,
+  image_name                varchar(255),
+  constraint pk_images primary key (id))
+;
+
 create table log (
   id                        bigint auto_increment not null,
   username                  varchar(255),
@@ -106,6 +112,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table account;
 
 drop table config;
+
+drop table images;
 
 drop table log;
 

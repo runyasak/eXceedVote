@@ -23,7 +23,7 @@ public class Application extends Controller {
 
 
         }
-        if(Config.find.byId(Config.main).open) {
+        if(Config.find.byId(Config.main).open||Account.findAccount(session().get("username")).type==2) {
             int num_team = Team.find.all().size();
 
             return ok(main.render(num_team, Team.find.all(), Account.findAccount(session().get("username"))));
@@ -31,7 +31,7 @@ public class Application extends Controller {
         else{
 
             return redirect(
-                    routes.Application.login()
+                    routes.Application.result()
             );
         }
     }
@@ -49,7 +49,7 @@ public class Application extends Controller {
     }
     @Security.Authenticated(Secured.class)
     public static Result team(Long id){
-        if(Config.find.byId(Config.team).open) {
+        if(Config.find.byId(Config.team).open||Account.findAccount(session().get("username")).type==2) {
             Team temp_team = Team.findTeamID(id);
 
             int accountID = Account.findAccount(session().get("username")).ID.intValue();
@@ -58,7 +58,7 @@ public class Application extends Controller {
         else{
 
             return redirect(
-                    routes.Application.login()
+                    routes.Application.result()
             );
         }
     }
@@ -77,14 +77,21 @@ public class Application extends Controller {
             Date d1 = new Date();
             LogController.saveLog(loginForm.get().username,d1);
             System.out.println(session().get("username"));
-    		return redirect(routes.Application.main());	
-    			
+            if(Config.find.byId(Config.main).open||Account.findAccount(session().get("username")).type==2) {
+                return redirect(routes.Application.main());
+            }
+            else{
+                return  redirect(routes.Application.result());
+
+            }
     	}
     	
     }
     @Security.Authenticated(Secured.class)
     public static Result result(){
+
         if(Account.findAccount(session().get("username")).type==1 ||Account.findAccount(session().get("username")).type==2) {
+
             return ok(result.render(Team.getRate(), Team.getRank(), Team.find.all(), Rate_Criteria.find.all(), Vote_Categories.find.all(), Team.getVote()));
         }
         else{
@@ -159,7 +166,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static Result editAccount(){
-        if(Config.find.byId(Config.edit_profile).open) {
+        if(Config.find.byId(Config.edit_profile).open||Account.findAccount(session().get("username")).type==2) {
             int num_team = Team.find.all().size();
 
 
@@ -168,7 +175,7 @@ public class Application extends Controller {
         }
         else{
             return redirect(
-                    routes.Application.login()
+                    routes.Application.result()
             );
 
         }
@@ -196,5 +203,9 @@ public class Application extends Controller {
         return redirect(
             routes.Application.login()
         );
+    }
+
+    public static Result uploadImage(){
+        return ok(uploadImage.render());
     }
 }
