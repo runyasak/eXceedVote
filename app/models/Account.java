@@ -28,6 +28,16 @@ public class Account extends Model {
     @OneToMany(mappedBy = "users")
     public List<Vote> votes;
     public static Finder<Long,Account> find=new Finder<Long,Account>(Long.class,Account.class);
+    public Account(){
+
+
+    }
+    public Account(String username,String password,int type){
+        this.username=username;
+        this.password=password;
+        this.type=type;
+
+    }
 
     public void addRate(Rate rates){
 
@@ -59,6 +69,14 @@ public class Account extends Model {
 
         return Account.find.where().eq("teams_id",id).findList();
 
+    }
+    public static Account create(String username,String password,int type){
+            Account account =new Account(username,password,type);
+            account.save();
+
+
+
+            return account;
     }
 
 	
