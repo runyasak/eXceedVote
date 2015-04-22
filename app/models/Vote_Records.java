@@ -16,7 +16,7 @@ public class Vote_Records extends Model{
 
     @ManyToOne
     public Vote_Categories categories;
-    @OneToMany(mappedBy="vote_rec")
+    @OneToMany(mappedBy="vote_rec", cascade = CascadeType.REMOVE)
     public List<Vote> votes;
 
     public static Model.Finder<Long,Vote_Records> find=new Model.Finder<Long,Vote_Records>(Long.class,Vote_Records.class);

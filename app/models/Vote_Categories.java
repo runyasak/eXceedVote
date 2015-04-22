@@ -15,7 +15,7 @@ public class Vote_Categories extends Model {
     public Long ID;
     public String categories_name;
 
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "categories", cascade = CascadeType.REMOVE)
     public List<Vote_Records> vote_rec;
 
     public static Finder<Long,Vote_Categories> find=new Finder<Long,Vote_Categories>(Long.class,Vote_Categories.class);

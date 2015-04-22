@@ -14,7 +14,7 @@ public class Rate_Criteria extends Model {
     @Id
     public Long ID;
     public String criteria_name;
-    @OneToMany(mappedBy = "criteria")
+    @OneToMany(mappedBy = "criteria", cascade = CascadeType.REMOVE)
     public List<Rate_Records> rate_rec;
 
     public static Finder<Long,Rate_Criteria> find=new Finder<Long,Rate_Criteria>(Long.class,Rate_Criteria.class);

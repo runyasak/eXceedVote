@@ -21,11 +21,11 @@ public class Team extends Model {
     public String project_name;
     public String description;
 
-    @OneToMany(mappedBy = "teams")
+    @OneToMany(mappedBy = "teams", cascade = CascadeType.REMOVE)
     public List<Account> users;
-    @OneToMany(mappedBy = "teams")
+    @OneToMany(mappedBy = "teams", cascade = CascadeType.REMOVE)
     public List<Rate> rates;
-    @OneToMany(mappedBy = "teams")
+    @OneToMany(mappedBy = "teams", cascade = CascadeType.REMOVE)
     public List<Vote> votes;
 
     public static Finder<Long,Team> find = new Finder<Long,Team>(Long.class,Team.class);

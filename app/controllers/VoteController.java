@@ -17,7 +17,7 @@ import views.html.testresult;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-
+import play.Logger;
 
 public class VoteController extends Controller{
 
@@ -26,6 +26,7 @@ public class VoteController extends Controller{
     }
 
     public static Result saveVote(Long teams_id,String topic_name){
+        Logger.info(session("username") + " ACCESS TO VOTING RESULT");
         Vote newVote =new Vote();
         Vote_Categories newTopic=Vote_Categories.findTopic(topic_name);
         Account newAccount=Account.findAccount(session().get("username"));
@@ -42,17 +43,20 @@ public class VoteController extends Controller{
         
         vote_rec.save();
         newVote.save();
-
+    Logger.info(session("username") + " VOTE SUCCESS." +  " TEAM = " + newTeam.team_name + " CATEGORIE = "+ newTopic.categories_name);
         return ok();
     }
 
     public static Result updateVote(Long teams_id,String topic_name, Long voteRecID){
+        Logger.info(session("username") + " ACCESS TO VOTING RESULT");
+
         String s = "UPDATE vote set teams_id = :count where id = :id";
         SqlUpdate update = Ebean.createSqlUpdate(s);
         update.setParameter("id", voteRecID);
         update.setParameter("count", teams_id);
         Ebean.execute(update);
 
+        Logger.info(session("username") + " VOTE UPDATE SUCCESS." +  ": TEAM_ID = " + teams_id + " TOPIC_NAME = " + topic_name + " VOTE_REC_ID = " + voteRecID);
         return ok();
     }
 
