@@ -11,6 +11,7 @@ import models.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import play.Logger;
 
 public class Application extends Controller {
     @Security.Authenticated(Secured.class)
@@ -65,6 +66,7 @@ public class Application extends Controller {
     public static Result authenticate(){
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
     	if(loginForm.hasErrors()){
+            Logger.info("LOGIN FAILED");
     		return badRequest(login.render(loginForm,Account.findAccount(session().get("username"))));
 
 
@@ -77,6 +79,7 @@ public class Application extends Controller {
             Date d1 = new Date();
             LogController.saveLog(loginForm.get().username,d1);
             System.out.println(session().get("username"));
+            Logger.info(session("username") + " LOGGED IN.");
             if(Config.find.byId(Config.main).open||Account.findAccount(session().get("username")).type==2) {
                 return redirect(routes.Application.main());
             }
@@ -198,6 +201,7 @@ public class Application extends Controller {
     }
 
     public static Result logout() {
+        Logger.info(session("username") + " LOGGED OUT.");
         session().clear();
         flash("success", "You have been logged out");
         return redirect(

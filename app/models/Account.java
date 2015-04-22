@@ -23,9 +23,9 @@ public class Account extends Model {
     @ManyToOne
     public Team teams;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
     public List<Rate> rates;
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
     public List<Vote> votes;
     public static Finder<Long,Account> find=new Finder<Long,Account>(Long.class,Account.class);
     public Account(){

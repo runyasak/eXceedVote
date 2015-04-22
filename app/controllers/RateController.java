@@ -14,6 +14,7 @@ import java.util.Map;
 import com.avaje.ebean.SqlUpdate;
 import com.avaje.ebean.Ebean;
 import java.util.ArrayList;
+import play.Logger;
 
 public class RateController extends Controller{
 
@@ -22,6 +23,12 @@ public class RateController extends Controller{
     }
 
     public static Result saveRate(Long teams_id,int score ,Long topic_id){
+        Logger.info(session("username") + " ACCESS TO RATING RESULT");
+        if( score > 5 || score < 0 ) {
+            Logger.info(session("username") + " SCORE NOT IN RANGE.");
+            return ok();
+        }
+
         Rate newRate =new Rate();
         Rate_Criteria newTopic=Rate_Criteria.findTopicID(topic_id);
         Account newAccount=Account.findAccount(session().get("username"));
@@ -39,16 +46,22 @@ public class RateController extends Controller{
         
         rate_rec.save();
         newRate.save();
-
+        Logger.info(session("username") + " RATE SUCCESS." +  ": SCORE = " + score + " TEAM = " + newTeam.team_name + " CRITERIA = " + newTopic.criteria_name);
         return ok();
     }
 
     public static Result updateRate(Long rateRecID, int score){
+        Logger.info(session("username") + " ACCESS TO RATING RESULT");
+        if( score > 5 || score < 0 ) {
+            Logger.info(session("username") + " SCORE NOT IN RANGE.");
+            return ok();
+        }
         String s = "UPDATE rate_records set score = :count where id = :id";
         SqlUpdate update = Ebean.createSqlUpdate(s);
         update.setParameter("id", rateRecID);
         update.setParameter("count", score);
         Ebean.execute(update);
+        Logger.info(session("username") + " RATE UPDATE SUCCESS." +  ": SCORE = " + score + " RATE_REC_ID = " + rateRecID);
 
         return ok();
     }

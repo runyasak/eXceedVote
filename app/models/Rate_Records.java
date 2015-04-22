@@ -15,7 +15,7 @@ public class Rate_Records extends Model {
     @Id
     public Long ID;
     public int score;
-    @OneToMany(mappedBy="rate_rec")
+    @OneToMany(mappedBy="rate_rec", cascade = CascadeType.REMOVE)
     public List<Rate> rates;
     @ManyToOne
     public Rate_Criteria criteria;
