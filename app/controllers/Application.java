@@ -7,7 +7,7 @@ import play.data.*;
 import static play.data.Form.*; 
 import views.html.*;
 import models.*;
-
+import util.Authenticator;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -193,7 +193,8 @@ public class Application extends Controller {
     	public String username;
     	public String password;
     	public String validate(){
-    		if(Account.authenticate(username,password)==null){
+            Account account =Authenticator.getInstance().authenticate(username,password);
+    		if(account==null){
     			return "Invalid user or password";
     		}
     		return null;    		
