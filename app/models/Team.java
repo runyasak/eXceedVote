@@ -41,25 +41,26 @@ public class Team extends Model {
     public static MultiKeyMap getRate(){
         int teamSize = Team.find.all().size();
         int topicSize = Rate_Criteria.find.all().size();
+        int rateSize = Rate.find.all().size();
         MultiKeyMap map = new MultiKeyMap();
 
         for( int i=1; i <= teamSize; i++){
             for( int j = 1; j <= topicSize; j++){
                 String teamName = Team.find.where().eq("ID", i).findUnique().team_name;
                 String topicName = Rate_Criteria.find.where().eq("ID", j).findUnique().criteria_name;
-                int score = sumScore(i,j);
-                map.put(teamName, topicName, score);
+                double score = sumScore(i,j);
+                map.put(teamName, topicName, score/(rateSize/topicSize));
             }
         }
         return map;
     }
 
-    public static int sumScore(int teamId, int topicId){
+    public static double sumScore(int teamId, int topicId){
         List<Rate> rate = new ArrayList<Rate>();
         rate = Rate.find.all();
         List<Rate_Records> rateCate = new ArrayList<Rate_Records>();
         rateCate = Rate_Records.find.all();
-        int score = 0;
+        double score = 0;
         for( Rate r : rate ){
             rateCate = Rate_Records.find.where().eq("id", r.rate_rec.ID).findList();
             for( Rate_Records rc : rateCate ) {
@@ -91,7 +92,8 @@ public class Team extends Model {
         rate = Rate.find.all();
         List<Rate_Records> rateCate = new ArrayList<Rate_Records>();
         rateCate = Rate_Records.find.all();
-        int rank = 1, score = sumScore(teamId, topicId);
+        int rank = 1;
+        double score = sumScore(teamId, topicId);
         for( Team t : Team.find.all() ){
             int tempId = t.ID.intValue();
             if( sumScore( tempId, topicId ) > score ){
