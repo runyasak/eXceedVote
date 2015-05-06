@@ -6,6 +6,7 @@ import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
+
 public class Account extends Model {
 	
     @Id
@@ -56,7 +57,7 @@ public class Account extends Model {
         } else {
             return null;
         }
-		
+
 	}
     public static Account findAccount(String username){
 
