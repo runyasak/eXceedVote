@@ -1,7 +1,7 @@
 $(function(){
 	
 	var note = $('#note');
-	var ts = (new Date(2015, 3, 23)).getTime();
+	var ts = (new Date(2015, 4, 7, 9, 20, 0, 0)).getTime();
 		
 	$('#countdown').countdown({
 		timestamp	: ts,
