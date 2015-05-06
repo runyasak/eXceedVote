@@ -4,7 +4,9 @@ import play.*;
 import play.api.mvc.Session;
 import play.mvc.*;
 import play.data.*;
-import static play.data.Form.*; 
+import static play.data.Form.*;
+
+import utils.Authenticator;
 import views.html.*;
 import models.*;
 
@@ -193,7 +195,9 @@ public class Application extends Controller {
     	public String username;
     	public String password;
     	public String validate(){
-    		if(Account.authenticate(username,password)==null){
+
+
+    		if( Authenticator.getInstance().authenticate(username,password)==null){
     			return "Invalid user or password";
     		}
     		return null;    		

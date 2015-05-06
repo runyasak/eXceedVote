@@ -14,5 +14,6 @@ libraryDependencies ++= Seq(
   javaWs,
   "org.mariadb.jdbc" % "mariadb-java-client" % "1.1.8",
   "mysql" % "mysql-connector-java" % "5.1.18",
-  "commons-collections" % "commons-collections" % "3.2.1"
-)
+  "commons-collections" % "commons-collections" % "3.2.1",
+  "org.mindrot" % "jbcrypt" % "0.3m"
+  )
