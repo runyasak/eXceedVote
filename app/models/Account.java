@@ -1,13 +1,9 @@
 package models;
-import javax.persistence.*;
-
-import play.*;
 import play.db.ebean.Model;
-import play.mvc.*;
-import views.html.*;
 
+import javax.persistence.*;
 import java.util.List;
-
+import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
 public class Account extends Model {
@@ -53,9 +49,13 @@ public class Account extends Model {
     }
 	public static Account authenticate(String username,String password){
 
-		
-		
-		return Account.find.where().eq("username", username).eq("password" , password).findUnique();
+        Account user_account = Account.findAccount(username);
+        System.out.println("hello");
+        if (user_account != null && BCrypt.checkpw(password, user_account.password)) {
+            return user_account;
+        } else {
+            return null;
+        }
 		
 	}
     public static Account findAccount(String username){
@@ -71,7 +71,8 @@ public class Account extends Model {
 
     }
     public static Account create(String username,String password,int type){
-            Account account =new Account(username,password,type);
+            Account account =new Account(username,BCrypt.hashpw(password,BCrypt.gensalt()),type);
+
             account.save();
 
 

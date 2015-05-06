@@ -1,6 +1,7 @@
 package controllers;
 
 import com.avaje.ebean.Ebean;
+import org.mindrot.jbcrypt.BCrypt;
 import play.*;
 import play.mvc.*;
 import play.data.*;
@@ -18,7 +19,7 @@ public class Register extends Controller {
 	public  static Result addAccount(String username,String password,int type){
 		Account a = new Account ();
         a.username=username;
-        a.password=password;
+        a.password=BCrypt.hashpw(password, BCrypt.gensalt());
         a.type=type;
     	a.save();
 
